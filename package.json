@@ -1,0 +1,31 @@
+{
+  "name": "spl",
+  "version": "1.0.0",
+  "description": "A simple programming language.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vighnesh153/spl.git"
+  },
+  "keywords": [
+    "spl"
+  ],
+  "author": "Vighnesh Raut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vighnesh153/spl/issues"
+  },
+  "homepage": "https://github.com/vighnesh153/spl#readme",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "jest": "^25.5.4",
+    "nodemon": "^2.0.3",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
+  }
+}
