@@ -1,4 +1,4 @@
-import { bugReport } from "../bug-report";
+import { bugReporter } from "../language-bug-handling";
 
 export class LineOfCode {
     constructor(public value: string, public number: number) {}
@@ -13,7 +13,7 @@ export class LineOfCode {
         if (this.isInBlock()) {
             this.value = this.value.substring(4)
         } else {
-            bugReport("BLOCK_LEVEL_CHOP_NON_BLOCK");
+            bugReporter.report("BLOCK_LEVEL_CHOP_NON_BLOCK");
         }
     }
 }
