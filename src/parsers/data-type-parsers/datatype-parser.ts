@@ -1,4 +1,4 @@
-export abstract class PrimitiveParser {
+export abstract class DatatypeParser {
     abstract type(): string;
 
     abstract parse(text: string): any;

@@ -1,9 +1,9 @@
-import { PrimitiveParser } from "../../../src/parsers/primitive-parsers/primitive-parser";
-import { BooleanParser } from "../../../src/parsers/primitive-parsers/boolean-parser";
+import { DatatypeParser } from "../../../../src/parsers/data-type-parsers/datatype-parser";
+import { BooleanParser } from "../../../../src/parsers/data-type-parsers/primitive-parsers/boolean-parser";
 
 describe('check the tryParse method of boolean parser.', () => {
 
-    let parser: PrimitiveParser;
+    let parser: DatatypeParser;
     beforeAll(() => {
         parser = new BooleanParser();
     });
@@ -65,7 +65,7 @@ describe('check the tryParse method of boolean parser.', () => {
 
 describe('check the parse method of the boolean parser.', () => {
 
-    let parser: PrimitiveParser;
+    let parser: DatatypeParser;
     beforeAll(() => {
         parser = new BooleanParser();
     });

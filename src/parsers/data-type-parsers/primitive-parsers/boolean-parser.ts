@@ -1,7 +1,7 @@
-import { PrimitiveParser } from "./primitive-parser";
-import { bugReporter } from "../../language-bug-handling";
+import { DatatypeParser } from "../datatype-parser";
+import { bugReporter } from "../../../language-bug-handling";
 
-export class BooleanParser extends PrimitiveParser {
+export class BooleanParser extends DatatypeParser {
     type(): string {
         return "boolean";
     }

@@ -1,9 +1,9 @@
-import { PrimitiveParser } from "../../../src/parsers/primitive-parsers/primitive-parser";
-import { StringParser } from "../../../src/parsers/primitive-parsers/string-parser";
+import { DatatypeParser } from "../../../../src/parsers/data-type-parsers/datatype-parser";
+import { StringParser } from "../../../../src/parsers/data-type-parsers/primitive-parsers/string-parser";
 
 describe('check the tryParse method of string parser.', () => {
 
-    let parser: PrimitiveParser;
+    let parser: DatatypeParser;
     beforeAll(() => {
         parser = new StringParser();
     });
@@ -72,7 +72,7 @@ describe('check the tryParse method of string parser.', () => {
 
 describe('check the parse method of string-parser.', () => {
 
-    let parser: PrimitiveParser;
+    let parser: DatatypeParser;
     beforeAll(() => {
         parser = new StringParser();
     });
