@@ -1,5 +1,5 @@
-import { DatatypeParser } from "../../../../src/parsers/data-type-parsers/datatype-parser";
-import { StringParser } from "../../../../src/parsers/data-type-parsers/primitive-parsers/string-parser";
+import { DatatypeParser } from "src/parsers/data-type-parsers/datatype-parser";
+import { StringParser } from "src/parsers/data-type-parsers/primitive-parsers/string-parser";
 
 describe('check the tryParse method of string parser.', () => {
 

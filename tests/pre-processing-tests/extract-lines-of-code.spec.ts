@@ -1,4 +1,4 @@
-import { extractEffectiveLoc } from "../../src/pre-processing/extract-effective-loc";
+import { extractEffectiveLoc } from "src/pre-processing/extract-effective-loc";
 
 describe('check for extracting effective lines of code', function () {
     test('should return empty array for empty string input', () => {

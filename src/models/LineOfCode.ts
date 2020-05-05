@@ -1,4 +1,4 @@
-import { bugReporter } from "../language-bug-handling";
+import { bugReporter } from "src/language-bug-handling";
 
 export class LineOfCode {
     constructor(public value: string, public number: number) {}

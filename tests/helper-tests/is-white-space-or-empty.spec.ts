@@ -1,4 +1,4 @@
-import { isWhiteSpaceOrEmpty } from '../../src/helpers/is-whitespace-or-empty';
+import { isWhiteSpaceOrEmpty } from 'src/helpers/is-whitespace-or-empty';
 
 describe('check isWhiteSpaceOrEmpty helper function.', () => {
     test('should return true for empty string.', () => {

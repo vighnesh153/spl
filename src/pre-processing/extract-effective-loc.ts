@@ -1,5 +1,5 @@
-import { isWhiteSpaceOrEmpty } from "../helpers/is-whitespace-or-empty";
-import { LineOfCode } from "../models/LineOfCode";
+import { isWhiteSpaceOrEmpty } from "src/helpers/is-whitespace-or-empty";
+import { LineOfCode } from "src/models/LineOfCode";
 
 export const extractEffectiveLoc = (code: string): LineOfCode[] => {
     const lines = code.split('\n');

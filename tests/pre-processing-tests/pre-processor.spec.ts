@@ -1,5 +1,5 @@
-import { preProcess } from "../../src/pre-processing/pre-processor";
-import { LineOfCode } from "../../src/models/LineOfCode";
+import { preProcess } from "src/pre-processing/pre-processor";
+import { LineOfCode } from "src/models/LineOfCode";
 
 describe('integration tests for pre-processor.', () => {
 

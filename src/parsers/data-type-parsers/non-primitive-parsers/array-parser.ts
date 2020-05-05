@@ -4,7 +4,7 @@ import { NumberParser } from "../primitive-parsers/number-parser";
 import { BooleanParser } from "../primitive-parsers/boolean-parser";
 import { StringParser } from "../primitive-parsers/string-parser";
 
-import { bugReporter } from "../../../language-bug-handling";
+import { bugReporter } from "src/language-bug-handling";
 
 export class ArrayParser extends DatatypeParser {
     primitiveParsers: DatatypeParser[] = [

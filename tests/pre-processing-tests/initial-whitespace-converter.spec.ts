@@ -1,7 +1,5 @@
-import {
-    initialWhitespaceConverter
-} from "../../src/pre-processing/initial-whitespace-converter";
-import { LineOfCode } from "../../src/models/LineOfCode";
+import { initialWhitespaceConverter } from "src/pre-processing/initial-whitespace-converter";
+import { LineOfCode } from "src/models/LineOfCode";
 
 describe('check if the initial white space is mapped to space character', () => {
 

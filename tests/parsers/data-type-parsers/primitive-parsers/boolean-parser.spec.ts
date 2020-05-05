@@ -1,5 +1,5 @@
-import { DatatypeParser } from "../../../../src/parsers/data-type-parsers/datatype-parser";
-import { BooleanParser } from "../../../../src/parsers/data-type-parsers/primitive-parsers/boolean-parser";
+import { DatatypeParser } from "src/parsers/data-type-parsers/datatype-parser";
+import { BooleanParser } from "src/parsers/data-type-parsers/primitive-parsers/boolean-parser";
 
 describe('check the tryParse method of boolean parser.', () => {
 

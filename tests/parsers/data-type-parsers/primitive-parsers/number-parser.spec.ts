@@ -1,5 +1,5 @@
-import { DatatypeParser } from "../../../../src/parsers/data-type-parsers/datatype-parser";
-import { NumberParser } from "../../../../src/parsers/data-type-parsers/primitive-parsers/number-parser";
+import { DatatypeParser } from "src/parsers/data-type-parsers/datatype-parser";
+import { NumberParser } from "src/parsers/data-type-parsers/primitive-parsers/number-parser";
 
 describe('check the functionality of tryParse in number parser.', () => {
 

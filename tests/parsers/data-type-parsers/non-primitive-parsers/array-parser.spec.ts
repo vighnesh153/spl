@@ -1,5 +1,5 @@
-import { DatatypeParser } from "../../../../src/parsers/data-type-parsers/datatype-parser";
-import { ArrayParser } from "../../../../src/parsers/data-type-parsers/non-primitive-parsers/array-parser";
+import { DatatypeParser } from "src/parsers/data-type-parsers/datatype-parser";
+import { ArrayParser } from "src/parsers/data-type-parsers/non-primitive-parsers/array-parser";
 
 
 describe('check the tryParse method in array parser.', () => {

@@ -1,4 +1,4 @@
-import { LineOfCode } from "../models/LineOfCode";
+import { LineOfCode } from "src/models/LineOfCode";
 
 const whiteSpaceConvert: { [key: string]: string } = {
     '\t': '    ',

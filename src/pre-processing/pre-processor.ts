@@ -1,6 +1,7 @@
 import { extractEffectiveLoc } from "./extract-effective-loc";
 import { initialWhitespaceConverter } from "./initial-whitespace-converter";
-import { LineOfCode } from "../models/LineOfCode";
+
+import { LineOfCode } from "src/models/LineOfCode";
 
 class PreProcessor {
     private _processedLOC: LineOfCode[] = [];
