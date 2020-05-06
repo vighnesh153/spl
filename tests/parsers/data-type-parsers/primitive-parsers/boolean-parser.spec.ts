@@ -5,7 +5,7 @@ describe('check the tryParse method of boolean parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new BooleanParser();
+        parser = BooleanParser.instance;
     });
 
     test('should have method type return "boolean"', () => {
@@ -67,7 +67,7 @@ describe('check the parse method of the boolean parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new BooleanParser();
+        parser = BooleanParser.instance;
     });
 
     test('should return true for "  true   " input.', () => {

@@ -6,7 +6,7 @@ describe('check the tryParse method in array parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new ArrayParser();
+        parser = ArrayParser.instance;
     });
 
     test('should have type method return "array".', () => {
@@ -108,7 +108,7 @@ describe('check the parse method in array parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new ArrayParser();
+        parser = ArrayParser.instance;
     });
 
     test('should return the empty array if empty.', () => {

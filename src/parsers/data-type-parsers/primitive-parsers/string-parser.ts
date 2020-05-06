@@ -3,6 +3,12 @@ import { bugReporter } from "src/language-bug-handling";
 
 
 export class StringParser extends DatatypeParser {
+    static instance = new StringParser();
+
+    private constructor() {
+        super();
+    }
+
     type(): string {
         return "string";
     }

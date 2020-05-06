@@ -2,6 +2,12 @@ import { DatatypeParser } from "../datatype-parser";
 import { bugReporter } from "src/language-bug-handling";
 
 export class BooleanParser extends DatatypeParser {
+    static instance = new BooleanParser();
+
+    private constructor() {
+        super();
+    }
+
     type(): string {
         return "boolean";
     }

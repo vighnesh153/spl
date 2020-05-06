@@ -5,7 +5,7 @@ describe('check the tryParse method of string parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new StringParser();
+        parser = StringParser.instance;
     });
 
     test('should have method type return "string"', () => {
@@ -74,7 +74,7 @@ describe('check the parse method of string-parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new StringParser();
+        parser = StringParser.instance;
     });
 
     test('should return the actual string from the input.', () => {

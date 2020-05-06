@@ -7,10 +7,16 @@ import { StringParser } from "../primitive-parsers/string-parser";
 import { bugReporter } from "src/language-bug-handling";
 
 export class ArrayParser extends DatatypeParser {
+    static instance = new ArrayParser();
+
+    private constructor() {
+        super();
+    }
+
     primitiveParsers: DatatypeParser[] = [
-        new NumberParser(),
-        new BooleanParser(),
-        new StringParser()
+        NumberParser.instance,
+        BooleanParser.instance,
+        StringParser.instance
     ];
 
     type(): string {

@@ -5,7 +5,7 @@ describe('check the functionality of tryParse in number parser.', () => {
 
     let parser: DatatypeParser;
     beforeAll(() => {
-        parser = new NumberParser();
+        parser = NumberParser.instance;
     });
 
     test('should have a type method return "number" string.', () => {
@@ -60,7 +60,7 @@ describe('check the functionality of parse in number parser.', () => {
 
     let parser: DatatypeParser;
     beforeEach(() => {
-        parser = new NumberParser();
+        parser = NumberParser.instance;
     });
 
     test('should return an integer from the string.', () => {

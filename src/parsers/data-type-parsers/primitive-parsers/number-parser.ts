@@ -2,6 +2,12 @@ import { DatatypeParser } from "../datatype-parser";
 import { bugReporter } from "src/language-bug-handling";
 
 export class NumberParser extends DatatypeParser {
+    static instance = new NumberParser();
+
+    private constructor() {
+        super();
+    }
+
     type(): string {
         return "number";
     }
