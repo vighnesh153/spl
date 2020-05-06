@@ -6,42 +6,46 @@ export enum VariableBlockType {
 }
 
 export class VariableBlock extends Block {
+    scope: Scope;
+
     constructor(public typeOfBlock: VariableBlockType,
                 public variableName: string,
                 public typeOfVariable: string,
                 public value: any,
-                public isPermanent: boolean) {
+                public isPermanent: boolean,
+                parentScope: Scope) {
         super();
+        this.scope = parentScope;
     }
 
-    private declare(scope: Scope): void {
-        if (scope.hasVariable(this.variableName)) {
+    private declare(): void {
+        if (this.scope.hasVariable(this.variableName)) {
             throw new Error('Trying to declare existing variable.');
         }
-        scope.variables[this.variableName] = {
+        this.scope.variables[this.variableName] = {
             type: this.typeOfVariable,
             value: this.value,
             isPermanent: this.isPermanent
         }
     }
 
-    private set(scope: Scope): void {
-        if (scope.hasVariable(this.variableName) === false) {
+    private set(): void {
+        if (this.scope.hasVariable(this.variableName) === false) {
             throw new Error('Trying to set value of not-declared variable.')
         } else {
-            const variable = scope.getVariable(this.variableName);
+            const variable = this.scope.getVariable(this.variableName);
             if (variable.isPermanent) {
                 throw new Error('Tried to modify a permanent variable.')
             }
-            scope.getVariable(this.variableName).value = this.value;
+            this.scope.getVariable(this.variableName).value = this.value;
         }
     }
 
-    execute(scope: Scope): void {
+    execute(): void {
         if (this.typeOfBlock === VariableBlockType.declare) {
-            this.declare(scope);
+            this.declare();
         } else {
-            this.set(scope);
+            this.set();
         }
     }
 }
