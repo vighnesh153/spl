@@ -1,10 +1,11 @@
 import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 import { Scope } from "src/models/Scope";
+import { Block } from "../../src/blocks/Block";
 
-describe('check declare functionality of variable block', () => {
+describe('check functionality of variable block', () => {
 
-    let variableBlock: VariableBlock;
+    let variableBlock: Block;
     beforeEach(() => {
         variableBlock = new VariableBlock(
             VariableBlockType.declare,
@@ -33,8 +34,14 @@ describe('check declare functionality of variable block', () => {
         variableBlock.execute();
 
         // Set
-        variableBlock.typeOfBlock = VariableBlockType.set;
-        variableBlock.value = 456.123;
+        variableBlock = new VariableBlock(
+            VariableBlockType.set,
+            'Some Variable Name',
+            'number',
+            456.123,
+            false,
+            variableBlock.scope
+        );
         variableBlock.execute();
 
         const variable = variableBlock.scope.getVariable('Some Variable Name');
