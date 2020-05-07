@@ -1,5 +1,5 @@
 const isValid = (text: string) => {
-    return /^\s*[_.a-zA-Z0-9]*$/.test(text);
+    return /^\s*[_a-zA-Z0-9]*$/.test(text);
 }
 
 export const parseInitialBooleanOrIdentifier = (text: string): string => {
