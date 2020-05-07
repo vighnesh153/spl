@@ -1,5 +1,7 @@
 import { Scope } from "src/models/Scope";
 import { NotEquals } from "src/expression-evaluators/boolean-expressions/not-equals";
+import { DoubleEquals } from "src/expression-evaluators/boolean-expressions/double-equals";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 describe('check the tryEvaluate functionality of not equals.', () => {
 
@@ -33,5 +35,41 @@ describe('check the tryEvaluate functionality of not equals.', () => {
 });
 
 describe('check the evaluate functionality of not equals.', () => {
-    // Not required because we are just returning the negation of double equals
+    let scope: Scope;
+    let notEquals: NotEquals;
+    beforeEach(() => {
+        scope = new Scope();
+        notEquals = new NotEquals(scope)
+    });
+
+    test('should return false for equal numbers inequality comparision.', () => {
+        const input = " 42 != 42";
+        const result = notEquals.evaluate(input);
+
+        expect(result.trim()).toStrictEqual('false');
+    });
+
+    test('should return true for non-equal numbers inequality comparision.', () => {
+        const input = " 42 != 4200";
+        const result = notEquals.evaluate(input);
+
+        expect(result.trim()).toStrictEqual('true');
+    });
+
+    test('should compare variable numbers.', () => {
+        const input = " someVariable1 != 100";
+
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someVariable1',
+            'number',
+            101,
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const result = notEquals.evaluate(input);
+        expect(result.trim()).toStrictEqual('true');
+    });
 });

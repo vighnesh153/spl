@@ -1,5 +1,7 @@
 import { Scope } from "src/models/Scope";
 import { LessThanOrEqual } from "src/expression-evaluators/boolean-expressions/less-than-or-equal";
+import { LessThan } from "src/expression-evaluators/boolean-expressions/less-than";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 describe('check the tryEvaluate functionality of less-than-or-equal.', () => {
 
@@ -33,5 +35,41 @@ describe('check the tryEvaluate functionality of less-than-or-equal.', () => {
 });
 
 describe('check the evaluate functionality of less-than-or-equal.', () => {
-    // Not requires as we are using other comparators to build this.
+    let scope: Scope;
+    let lessThanOrEqual: LessThanOrEqual;
+    beforeEach(() => {
+        scope = new Scope();
+        lessThanOrEqual = new LessThanOrEqual(scope)
+    });
+
+    test('should return false for incorrect less than or equal comparision.', () => {
+        const input = " 200 <= 56";
+        const result = lessThanOrEqual.evaluate(input);
+
+        expect(result.trim()).toStrictEqual('false');
+    });
+
+    test('should return true for correct less than or equal comparision.', () => {
+        const input = " 40 <= 41";
+        const result = lessThanOrEqual.evaluate(input);
+
+        expect(result.trim()).toStrictEqual('true');
+    });
+
+    test('should compare variable numbers.', () => {
+        const input = " someVariable1 <= 100";
+
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someVariable1',
+            'number',
+            99,
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const result = lessThanOrEqual.evaluate(input);
+        expect(result.trim()).toStrictEqual('true');
+    });
 });

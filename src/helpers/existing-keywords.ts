@@ -39,5 +39,7 @@ existingKeywordsSet.add('array');
 
 existingKeywordsSet.add('true');
 existingKeywordsSet.add('false');
+existingKeywordsSet.add('and');
+existingKeywordsSet.add('or');
 
 export const existingKeywords = existingKeywordsSet;

@@ -46,14 +46,14 @@ describe('check the evaluate functionality of double equals.', () => {
         const input = " 2 == 56";
         const result = doubleEquals.evaluate(input);
 
-        expect(result).toStrictEqual(false);
+        expect(result.trim()).toStrictEqual('false');
     });
 
     test('should return true for equal numbers equality comparision.', () => {
         const input = " 42 == 42";
         const result = doubleEquals.evaluate(input);
 
-        expect(result).toStrictEqual(true);
+        expect(result.trim()).toStrictEqual('true');
     });
 
     test('should compare variable numbers.', () => {
@@ -70,6 +70,6 @@ describe('check the evaluate functionality of double equals.', () => {
         variableBlock.execute();
 
         const result = doubleEquals.evaluate(input);
-        expect(result).toStrictEqual(true);
+        expect(result.trim()).toStrictEqual('true');
     });
 });

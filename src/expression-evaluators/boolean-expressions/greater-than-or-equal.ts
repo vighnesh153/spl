@@ -2,6 +2,8 @@ import { ExpressionEvaluator } from "src/expression-evaluators/expression-evalua
 import { Scope } from "src/models/Scope";
 import { GreaterThan } from "src/expression-evaluators/boolean-expressions/greater-than";
 import { DoubleEquals } from "src/expression-evaluators/boolean-expressions/double-equals";
+import { numericComparisionEvaluator } from "src/expression-evaluators/boolean-expressions/numeric-comparision-evaluator";
+import { bugReporter } from "src/language-bug-handling";
 
 export class GreaterThanOrEqual extends ExpressionEvaluator {
     private identifier: string = '>=';
@@ -15,10 +17,15 @@ export class GreaterThanOrEqual extends ExpressionEvaluator {
     }
 
     evaluate(text: string): any {
-        const greaterThan = new GreaterThan(this.scope);
-        const doubleEquals = new DoubleEquals(this.scope);
-
-        return greaterThan.evaluate(text.replace(this.identifier, ">")) ||
-            doubleEquals.evaluate(text.replace(this.identifier, "=="));
+        if (this.tryEvaluate(text)) {
+            return numericComparisionEvaluator(
+                text,
+                this.identifier,
+                this.scope,
+                (lhs, rhs) => lhs >= rhs
+            );
+        } else {
+            bugReporter.report('INVALID_GREATER_THAN_OR_EQUAL_COMPARISION');
+        }
     }
 }

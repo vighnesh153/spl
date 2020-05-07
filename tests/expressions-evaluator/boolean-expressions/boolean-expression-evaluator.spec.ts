@@ -97,7 +97,8 @@ describe('check the tryEvaluate functionality of boolean-expression-evaluator.',
         ['1 <= 10', true],
         ['2 >= 90', true],
         [" 'hello' ", false],
-        [' 100', false]
+        [' 100', false],
+        [' (5 >= 1 and 3 < 1) and  true', true]
     ])('some basic asserts', (input: string, expected: boolean) => {
         const result = booleanExpressionEvaluator.tryEvaluate(input);
         expect(result).toStrictEqual(expected);
@@ -119,10 +120,35 @@ describe('check the evaluate functionality of boolean-expression-evaluator.', ()
         ['false or false', false],
         ['1 <= 10', true],
         ['2 >= 90', false],
-        [' false or 100 < 90', false]
+        [' false or 100 < 90', false],
+        [' (5 >= 1 and 3 < 1) and  true', false],
+        [' (5 >= 1 and 3 > 1) and  true', true],
+        [' (5 >= 1 and 3 < 1) or  true', true],
+        [' (5 >= 1 and 3 > 1) and  (3 < 17 and 17 < 15)', false],
+        [' (5 >= 1 and 3 > 1) and  (3 < 17 and 17 > 15)', true],
+        [' (5 >= 1 and 3 > 1) and  (3 < 17 and 17 >= 15)', true],
+        [' (5 >= 1 and 3 < 1) or  (3 < 17 and 17 >= 15)', true],
+        [' (5 >= 1 and 3 < 1) or  (3 > 17 and 17 >= 15)', false],
     ])('should evaluate simple boolean expressions',
         (input: string, expected: boolean) => {
         const result = booleanExpressionEvaluator.evaluate(input);
         expect(result).toStrictEqual(expected);
+    });
+
+    test('should evaluate the boolean expression also using the variable.', () => {
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someVariable',
+            'number',
+            42,
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const input = "( 3 < 4 and someVariable >= 10)";
+
+        const result = booleanExpressionEvaluator.evaluate(input);
+        expect(result).toStrictEqual(true);
     });
 });

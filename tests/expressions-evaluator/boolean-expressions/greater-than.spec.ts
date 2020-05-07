@@ -46,14 +46,14 @@ describe('check the evaluate functionality of greater-than.', () => {
         const input = " 2 > 56";
         const result = greaterThan.evaluate(input);
 
-        expect(result).toStrictEqual(false);
+        expect(result.trim()).toStrictEqual('false');
     });
 
     test('should return true for correct greater than comparision.', () => {
         const input = " 42 > -41";
         const result = greaterThan.evaluate(input);
 
-        expect(result).toStrictEqual(true);
+        expect(result.trim()).toStrictEqual('true');
     });
 
     test('should compare variable numbers.', () => {
@@ -70,6 +70,6 @@ describe('check the evaluate functionality of greater-than.', () => {
         variableBlock.execute();
 
         const result = greaterThan.evaluate(input);
-        expect(result).toStrictEqual(true);
+        expect(result.trim()).toStrictEqual('true');
     });
 });

@@ -2,12 +2,12 @@ import { parseInitialNumberOrIdentifier } from "src/helpers/parse-initial-number
 
 test.each([
     ['abc', 'abc'],
-    ['  m m', 'm'],
+    ['  m m', '  m'],
     ['42394.23423', '42394.23423'],
     ['some_identifier_', 'some_identifier_'],
     ['324234_423423', '324234_423423'],
 ])('check the parse-initial-number-or-identifier functionality.',
     (input: string, expected: string) => {
-    const result = parseInitialNumberOrIdentifier(input);
+    const result = parseInitialNumberOrIdentifier(input, false);
     expect(result).toStrictEqual(expected);
 });

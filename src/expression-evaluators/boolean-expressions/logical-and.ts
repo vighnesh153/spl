@@ -1,6 +1,7 @@
 import { ExpressionEvaluator } from "src/expression-evaluators/expression-evaluator";
 import { Scope } from "src/models/Scope";
-import { BooleanExpressionEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
+import { bugReporter } from "src/language-bug-handling";
+import { booleanComparisionEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-comparision-evaluator";
 
 export class LogicalAnd extends ExpressionEvaluator {
     identifier = 'and';
@@ -14,20 +15,15 @@ export class LogicalAnd extends ExpressionEvaluator {
     }
 
     evaluate(text: string): any {
-        const splitEnds = text.trim().split(this.identifier);
-        const lhs = splitEnds[0].trim();
-        const rhs = splitEnds[1].trim();
-
-        const booleanExpressionEvaluator = new BooleanExpressionEvaluator(this.scope);
-
-        if (booleanExpressionEvaluator.tryEvaluate(lhs) === false ||
-            booleanExpressionEvaluator.tryEvaluate(rhs) === false) {
-            throw new Error('Invalid boolean expressions.');
+        if (this.tryEvaluate(text)) {
+            return booleanComparisionEvaluator(
+                text,
+                this.identifier,
+                this.scope,
+                (lhs, rhs) => lhs && rhs
+            );
+        } else {
+            bugReporter.report('INVALID_LOGICAL_AND_COMPARISION');
         }
-
-        const lhsResult = booleanExpressionEvaluator.evaluate(lhs);
-        const rhsResult = booleanExpressionEvaluator.evaluate(rhs);
-
-        return lhsResult && rhsResult;
     }
 }

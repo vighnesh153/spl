@@ -1,6 +1,7 @@
 import { ExpressionEvaluator } from "src/expression-evaluators/expression-evaluator";
 import { Scope } from "src/models/Scope";
-import { DoubleEquals } from "src/expression-evaluators/boolean-expressions/double-equals";
+import { numericComparisionEvaluator } from "src/expression-evaluators/boolean-expressions/numeric-comparision-evaluator";
+import { bugReporter } from "src/language-bug-handling";
 
 export class NotEquals extends ExpressionEvaluator {
     private identifier: string = '!=';
@@ -14,9 +15,16 @@ export class NotEquals extends ExpressionEvaluator {
     }
 
     evaluate(text: string): any {
-        return (new DoubleEquals(this.scope)).evaluate(
-            text.replace(this.identifier, "==")
-        ) === false;
+        if (this.tryEvaluate(text)) {
+            return numericComparisionEvaluator(
+                text,
+                this.identifier,
+                this.scope,
+                (lhs, rhs) => lhs != rhs
+            );
+        } else {
+            bugReporter.report('INVALID_INEQUALITY_COMPARISION');
+        }
     }
 
 }

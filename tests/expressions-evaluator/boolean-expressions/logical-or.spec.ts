@@ -1,6 +1,7 @@
 import { Scope } from "src/models/Scope";
-import { LogicalAnd } from "src/expression-evaluators/boolean-expressions/logical-and";
 import { LogicalOr } from "src/expression-evaluators/boolean-expressions/logical-or";
+import { LogicalAnd } from "src/expression-evaluators/boolean-expressions/logical-and";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 describe('check the tryEvaluate functionality of logical-and.', () => {
 
@@ -30,5 +31,46 @@ describe('check the tryEvaluate functionality of logical-and.', () => {
         const result = logicalOr.tryEvaluate(input);
 
         expect(result).toStrictEqual(true);
+    });
+});
+
+describe('check the evaluate functionality of logical or.', () => {
+
+    let scope: Scope;
+    let logicalOr: LogicalOr;
+    beforeEach(() => {
+        scope = new Scope();
+        logicalOr = new LogicalOr(scope)
+    });
+
+    test('should return false for (false || false) input.', () => {
+        const input = " false or false";
+        const result = logicalOr.evaluate(input);
+
+        expect(result.trim()).toStrictEqual('false');
+    });
+
+    test('should return true for (false || true) input.', () => {
+        const input = "   false  or   true  ";
+        const result = logicalOr.evaluate(input);
+
+        expect(result.trim()).toStrictEqual('true');
+    });
+
+    test('should compare variable numbers.', () => {
+        const input = " someVariable1 or  false";
+
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someVariable1',
+            'boolean',
+            true,
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const result = logicalOr.evaluate(input);
+        expect(result.trim()).toStrictEqual('true');
     });
 });
