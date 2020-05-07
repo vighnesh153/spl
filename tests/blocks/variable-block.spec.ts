@@ -1,7 +1,7 @@
 import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 import { Scope } from "src/models/Scope";
-import { Block } from "../../src/blocks/Block";
+import { Block } from "src/blocks/Block";
 
 describe('check functionality of variable block', () => {
 
@@ -9,7 +9,7 @@ describe('check functionality of variable block', () => {
     beforeEach(() => {
         variableBlock = new VariableBlock(
             VariableBlockType.declare,
-            'Some Variable Name',
+            'Some_Variable_Name',
             'number',
             123.456,
             false,
@@ -21,7 +21,7 @@ describe('check functionality of variable block', () => {
         'executed on a declaration VariableBlock', () => {
 
         variableBlock.execute();
-        const variable = variableBlock.scope.getVariable('Some Variable Name');
+        const variable = variableBlock.scope.getVariable('Some_Variable_Name');
 
         expect(variable.value).toStrictEqual(123.456);
         expect(variable.isPermanent).toStrictEqual(false);
@@ -36,7 +36,7 @@ describe('check functionality of variable block', () => {
         // Set
         variableBlock = new VariableBlock(
             VariableBlockType.set,
-            'Some Variable Name',
+            'Some_Variable_Name',
             'number',
             456.123,
             false,
@@ -44,7 +44,7 @@ describe('check functionality of variable block', () => {
         );
         variableBlock.execute();
 
-        const variable = variableBlock.scope.getVariable('Some Variable Name');
+        const variable = variableBlock.scope.getVariable('Some_Variable_Name');
 
         expect(variable.value).toStrictEqual(456.123);
     });

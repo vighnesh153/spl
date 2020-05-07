@@ -1,5 +1,7 @@
 import { Block } from "src/blocks/Block";
 import { Scope } from "src/models/Scope";
+import { existingKeywords } from "src/helpers/existing-keywords";
+import { isValidIdentifier } from "src/helpers/is-valid-identifier";
 
 export enum VariableBlockType {
     declare, set
@@ -16,6 +18,16 @@ export class VariableBlock extends Block {
                 parentScope: Scope) {
         super();
         this.scope = parentScope;
+
+        this.variableName = this.variableName.trim();
+
+        if (existingKeywords.has(this.variableName)) {
+            throw new Error(`'${this.variableName}' is a keyword and can't be used as an identifier.`)
+        }
+
+        if (isValidIdentifier(this.variableName) === false) {
+            throw new Error(`'${this.variableName}' is not a valid identifier name.`)
+        }
     }
 
     private declare(): void {
