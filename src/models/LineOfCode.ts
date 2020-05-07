@@ -2,7 +2,7 @@ import { bugReporter } from "src/language-bug-handling";
 
 export class LineOfCode {
     constructor(public value: string, public number: number) {
-        throw new Error('Not implemented: isIndentationValid');
+        // throw new Error('Not implemented: isIndentationValid');
     }
 
     // returns true if it has 4 space characters in the beginning
