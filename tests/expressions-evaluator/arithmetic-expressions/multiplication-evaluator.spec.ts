@@ -2,7 +2,7 @@ import { Scope } from "src/models/Scope";
 import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 import { MultiplicationEvaluator } from "src/expression-evaluators/arithmetic-expressions/multiplication-evaluator";
 
-describe('check the tryEvaluate functionality of addition evaluator.', () => {
+describe('check the tryEvaluate functionality of multiplication evaluator.', () => {
 
     let scope: Scope;
     let multiplicationEvaluator: MultiplicationEvaluator;
@@ -56,7 +56,7 @@ describe('check the evaluate functionality of multiplication evaluator.', () => 
         expect(result.trim()).toStrictEqual('112');
     });
 
-    test('should add number from variable.', () => {
+    test('should multiply number from variable.', () => {
         const input = " someVariable1 * -8";
 
         const variableBlock = new VariableBlock(
