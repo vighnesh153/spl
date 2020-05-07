@@ -17,7 +17,7 @@ describe('check the tryEvaluate functionality of less-than.', () => {
         expect(result).toStrictEqual(false);
     });
 
-    test('should return false if input is not a valid less-than or equal expression.', () => {
+    test('should return false if input is not a valid less-than expression.', () => {
         const input = "1 != 2";
         const result = lessThan.tryEvaluate(input);
 
@@ -32,6 +32,6 @@ describe('check the tryEvaluate functionality of less-than.', () => {
     });
 });
 
-describe('check the evaluate functionality of less-than or equal.', () => {
+describe('check the evaluate functionality of less-than.', () => {
     // Not requires as we are using other comparators to build this.
 });

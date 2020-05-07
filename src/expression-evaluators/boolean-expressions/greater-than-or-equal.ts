@@ -18,7 +18,7 @@ export class GreaterThanOrEqual extends ExpressionEvaluator {
         const greaterThan = new GreaterThan(this.scope);
         const doubleEquals = new DoubleEquals(this.scope);
 
-        return greaterThan.evaluate(text) ||
-            doubleEquals.evaluate(text);
+        return greaterThan.evaluate(text.replace(this.identifier, ">")) ||
+            doubleEquals.evaluate(text.replace(this.identifier, "=="));
     }
 }

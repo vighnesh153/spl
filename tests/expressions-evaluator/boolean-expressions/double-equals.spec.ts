@@ -33,7 +33,7 @@ describe('check the tryEvaluate functionality of double equals.', () => {
     });
 });
 
-describe('check the tryEvaluate functionality of double equals.', () => {
+describe('check the evaluate functionality of double equals.', () => {
 
     let scope: Scope;
     let doubleEquals: DoubleEquals;

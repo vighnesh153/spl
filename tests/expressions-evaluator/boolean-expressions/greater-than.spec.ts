@@ -2,7 +2,7 @@ import { Scope } from "src/models/Scope";
 import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 import { GreaterThan } from "src/expression-evaluators/boolean-expressions/greater-than";
 
-describe('check the tryEvaluate functionality of double equals.', () => {
+describe('check the tryEvaluate functionality of greater-than.', () => {
 
     let scope: Scope;
     let greaterThan: GreaterThan;

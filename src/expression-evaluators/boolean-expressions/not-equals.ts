@@ -14,7 +14,9 @@ export class NotEquals extends ExpressionEvaluator {
     }
 
     evaluate(text: string): any {
-        return (new DoubleEquals(this.scope)).evaluate(text) === false;
+        return (new DoubleEquals(this.scope)).evaluate(
+            text.replace(this.identifier, "==")
+        ) === false;
     }
 
 }

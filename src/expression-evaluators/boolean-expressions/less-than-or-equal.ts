@@ -16,6 +16,8 @@ export class LessThanOrEqual extends ExpressionEvaluator {
     evaluate(text: string): any {
         const greaterThan = new GreaterThan(this.scope);
 
-        return greaterThan.evaluate(text) === false;
+        return greaterThan.evaluate(
+            text.replace(this.identifier, ">")
+        ) === false;
     }
 }
