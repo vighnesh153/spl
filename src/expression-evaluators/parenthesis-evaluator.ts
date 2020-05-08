@@ -2,10 +2,12 @@ import { ExpressionEvaluator } from "src/expression-evaluators/expression-evalua
 import { Scope } from "src/models/Scope";
 import { bugReporter } from "src/language-bug-handling";
 import { BooleanExpressionEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
+import { ArithmeticExpressionEvaluator } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
 
 export class ParenthesisEvaluator extends ExpressionEvaluator {
 
-    constructor(public readonly scope: Scope) {
+    constructor(public readonly scope: Scope,
+                public readonly type: 'arithmetic' | 'boolean') {
         super();
     }
 
@@ -52,18 +54,24 @@ export class ParenthesisEvaluator extends ExpressionEvaluator {
                 indexOfClosingParenthesis - indexOfOpeningParenthesis - 1
             );
 
-            const evaluators = new BooleanExpressionEvaluator(this.scope);
-            for (const evaluator of evaluators.booleanExpressionEvaluators) {
+            const evaluators = this.type === 'boolean'
+                ? new BooleanExpressionEvaluator(this.scope)
+                : new ArithmeticExpressionEvaluator(this.scope);
+
+            for (const evaluator of evaluators.expressionEvaluators) {
                 if (evaluator.tryEvaluate(insideExpression)) {
                     const result = evaluator.evaluate(insideExpression).toString();
                     return text.replace(`(${insideExpression})`, result);
                 }
             }
 
-            throw new Error('Invalid boolean expression');
+            throw new Error(`Invalid ${this.type} expression`);
 
         } else {
-            bugReporter.report('EVALUATE_CALLED_ON_INVALID_PARENTHESIS_BLOCK');
+            bugReporter.report(
+                `EVALUATE_CALLED_ON_INVALID_${
+                    this.type.toUpperCase
+                }_PARENTHESIS_BLOCK`);
         }
     }
 

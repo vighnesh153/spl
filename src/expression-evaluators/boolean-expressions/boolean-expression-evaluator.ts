@@ -4,7 +4,7 @@ import { ExpressionEvaluator } from "src/expression-evaluators/expression-evalua
 import { bugReporter } from "src/language-bug-handling";
 import { BooleanParser } from "src/parsers/data-type-parsers/primitive-parsers/boolean-parser";
 
-import { ParenthesisEvaluator } from "src/expression-evaluators/boolean-expressions/parenthesis-evaluator";
+import { ParenthesisEvaluator } from "src/expression-evaluators/parenthesis-evaluator";
 import { LogicalAnd } from "src/expression-evaluators/boolean-expressions/logical-and";
 import { LogicalOr } from "src/expression-evaluators/boolean-expressions/logical-or";
 import { DoubleEquals } from "src/expression-evaluators/boolean-expressions/double-equals";
@@ -16,26 +16,26 @@ import { LessThanOrEqual } from "src/expression-evaluators/boolean-expressions/l
 import { BooleanEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-evaluator";
 
 export class BooleanExpressionEvaluator extends ExpressionEvaluator {
-    readonly booleanExpressionEvaluators: ExpressionEvaluator[];
+    readonly expressionEvaluators: ExpressionEvaluator[];
 
     constructor(public scope: Scope) {
         super();
-        this.booleanExpressionEvaluators = [];
+        this.expressionEvaluators = [];
 
         // Following order matters
-        this.booleanExpressionEvaluators.push(new ParenthesisEvaluator(this.scope));
+        this.expressionEvaluators.push(new ParenthesisEvaluator(this.scope, 'boolean'));
 
-        this.booleanExpressionEvaluators.push(new DoubleEquals(this.scope));
-        this.booleanExpressionEvaluators.push(new NotEquals(this.scope));
-        this.booleanExpressionEvaluators.push(new GreaterThanOrEqual(this.scope));
-        this.booleanExpressionEvaluators.push(new GreaterThan(this.scope));
-        this.booleanExpressionEvaluators.push(new LessThanOrEqual(this.scope));
-        this.booleanExpressionEvaluators.push(new LessThan(this.scope));
+        this.expressionEvaluators.push(new DoubleEquals(this.scope));
+        this.expressionEvaluators.push(new NotEquals(this.scope));
+        this.expressionEvaluators.push(new GreaterThanOrEqual(this.scope));
+        this.expressionEvaluators.push(new GreaterThan(this.scope));
+        this.expressionEvaluators.push(new LessThanOrEqual(this.scope));
+        this.expressionEvaluators.push(new LessThan(this.scope));
 
-        this.booleanExpressionEvaluators.push(new LogicalAnd(this.scope));
-        this.booleanExpressionEvaluators.push(new LogicalOr(this.scope));
+        this.expressionEvaluators.push(new LogicalAnd(this.scope));
+        this.expressionEvaluators.push(new LogicalOr(this.scope));
 
-        this.booleanExpressionEvaluators.push(new BooleanEvaluator(this.scope));
+        this.expressionEvaluators.push(new BooleanEvaluator(this.scope));
     }
 
     tryEvaluate(text: string): boolean {
@@ -44,7 +44,7 @@ export class BooleanExpressionEvaluator extends ExpressionEvaluator {
         // be a string.
         if (text.includes("'") || text.includes('"')) return false;
 
-        for (const evaluator of this.booleanExpressionEvaluators) {
+        for (const evaluator of this.expressionEvaluators) {
             if (evaluator.tryEvaluate(text)) {
                 return true;
             }
@@ -58,7 +58,7 @@ export class BooleanExpressionEvaluator extends ExpressionEvaluator {
 
             while (booleanParser.tryParse(text) === false) {
                 let parsedByAny = false;
-                for (const evaluator of this.booleanExpressionEvaluators) {
+                for (const evaluator of this.expressionEvaluators) {
                     if (evaluator.tryEvaluate(text)) {
                         parsedByAny = true;
                         text = evaluator.evaluate(text);
