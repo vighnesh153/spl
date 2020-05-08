@@ -32,7 +32,7 @@ describe('check the tryEvaluate functionality of boolean-expression-evaluator.',
         expect(result).toStrictEqual(false);
     });
 
-    test('should return true for a string value input.', () => {
+    test('should return false for a string value input.', () => {
         const input = " 'Hello World'   ";
         const result = booleanExpressionEvaluator.tryEvaluate(input);
 
