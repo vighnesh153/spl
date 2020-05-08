@@ -1,0 +1,154 @@
+import { ArrayExpressionEvaluator } from "src/expression-evaluators/array-expression-evaluator";
+import { Scope } from "src/models/Scope";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+
+describe('check the tryEvaluate functionality of array expression evaluator.', () => {
+
+    let arrayExpressionEvaluator: ArrayExpressionEvaluator;
+    let scope: Scope;
+    beforeEach(() => {
+        scope = new Scope();
+        arrayExpressionEvaluator = new ArrayExpressionEvaluator(scope);
+    });
+
+
+    test.each([
+        [' [  1, 2, 3, 4, 5     ]    '],
+        [' [  true,    false     ,     false     ]    '],
+        ["   [    'aaa'   ,    'b' ]  "],
+    ])('should evaluate to true.', (input: string) => {
+        const result = arrayExpressionEvaluator.tryEvaluate(input);
+        expect(result).toStrictEqual(true);
+    });
+
+    test.each([
+        [' [  1, 2, true     , 5     ]    '],
+        [' [  true,    false     ,     false         '],
+        [' [  true,         ,     false      ]   '],
+        ["   [    'aaa'       'b' ]  "],
+    ])('should evaluate to false.', (input: string) => {
+        const result = arrayExpressionEvaluator.tryEvaluate(input);
+        expect(result).toStrictEqual(false);
+    });
+
+
+    test.each([
+        [' [  1, 2, 1 + 3 * 9     ,  56 - 3 * 7     ]    '],
+        [' [  true,    false     ,     false   or  true     ]    '],
+        ["   [    'aaa' ,  someStringVariable ]  "],
+    ])('should evaluate to true.', (input: string) => {
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someStringVariable',
+            'string',
+            'Hello',
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const result = arrayExpressionEvaluator.tryEvaluate(input);
+        expect(result).toStrictEqual(true);
+    });
+
+    test.each([
+        [' [  1, 2, 1 + 3 * 9     ,  56 - 3 * 7   ,  someStringVariable  ]    '],
+        [' [  true,    someStringVariable     ,     false   or  true     ]    '],
+        ["   [    'aaa' ,    true and (false or true) ]  "],
+    ])('should evaluate to false.', (input: string) => {
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someStringVariable',
+            'string',
+            'Hello',
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const result = arrayExpressionEvaluator.tryEvaluate(input);
+        expect(result).toStrictEqual(false);
+    });
+
+});
+
+describe('check the evaluate functionality of array expression evaluator.', () => {
+
+    let arrayExpressionEvaluator: ArrayExpressionEvaluator;
+    let scope: Scope;
+    beforeEach(() => {
+        scope = new Scope();
+        arrayExpressionEvaluator = new ArrayExpressionEvaluator(scope);
+    });
+
+
+    test.each([
+        [' [  1, 2, 3, 4, 5     ]    ', [1, 2, 3, 4, 5]],
+        [' [  true,    false     ,     false     ]    ', [true, false, false]],
+        ["   [    'aaa'   ,    'b' ]  ", ['aaa', 'b']],
+    ])('should evaluate the array.', (input: string, expected: any[]) => {
+        const result = arrayExpressionEvaluator.evaluate(input);
+        expect(result).toStrictEqual(expected);
+    });
+
+    test.each([
+        [' [  1, 2, 1 + 3 * 9     ,  56 - 3 * 7     ]    ', [1, 2, 28, 35]],
+        [' [  true,    false     ,     false   or  true     ]    ', [true, false, true]],
+        ["   [    'aaa' ,  someStringVariable ]  ", ['aaa', 'Hello']],
+    ])('should evaluate the array from expressions.',
+        (input: string, expected: any[]) => {
+            const variableBlock = new VariableBlock(
+                VariableBlockType.declare,
+                'someStringVariable',
+                'string',
+                'Hello',
+                true,
+                scope
+            );
+            variableBlock.execute();
+
+            const result = arrayExpressionEvaluator.evaluate(input);
+            expect(result).toStrictEqual(expected);
+        });
+
+});
+
+describe('check the getType functionality of array expression evaluator.', () => {
+    let arrayExpressionEvaluator: ArrayExpressionEvaluator;
+    let scope: Scope;
+    beforeEach(() => {
+        scope = new Scope();
+        arrayExpressionEvaluator = new ArrayExpressionEvaluator(scope);
+    });
+
+
+    test.each([
+        [' [  1, 2, 3, 4, 5     ]    ', 'number'],
+        [' [  true,    false     ,     false     ]    ', 'boolean'],
+        ["   [    'aaa'   ,    'b' ]  ", 'string'],
+        ["   [     ]  ", 'any'],
+    ])('should evaluate the type of array.', (input: string, expected: string) => {
+        const result = arrayExpressionEvaluator.getType(input);
+        expect(result).toStrictEqual(expected);
+    });
+
+    test.each([
+        [' [  1, 2, 1 + 3 * 9     ,  56 - 3 * 7     ]    ', 'number'],
+        [' [  true,    false     ,     false   or  true     ]    ', 'boolean'],
+        ["   [   someStringVariable    ,     'aaa'  ]  ", 'string'],
+    ])('should evaluate the type of array from expressions.',
+        (input: string, expected: string) => {
+            const variableBlock = new VariableBlock(
+                VariableBlockType.declare,
+                'someStringVariable',
+                'string',
+                'Hello',
+                true,
+                scope
+            );
+            variableBlock.execute();
+
+            const result = arrayExpressionEvaluator.getType(input);
+            expect(result).toStrictEqual(expected);
+        });
+});
