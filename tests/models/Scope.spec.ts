@@ -1,5 +1,6 @@
 import { Scope } from "src/models/Scope";
-import { Variable } from "../../src/models/Variable";
+import { Variable } from "src/models/Variable";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 describe('check hasVariable functionality of scope.', () => {
 
@@ -83,4 +84,57 @@ describe('check getVariable functionality of scope.', () => {
         const result = scope.getVariable('someOtherIdentifier');
         expect(result).toStrictEqual(variable);
     });
+});
+
+describe('check shallowClone functionality of scope.', () => {
+
+    let scope: Scope;
+    let clonedScope: Scope;
+    let variable: Variable;
+    beforeEach(() => {
+        scope = new Scope();
+        clonedScope = scope.shallowClone();
+        variable = { type: 'any', value: 'any' };
+    });
+
+    it('should not add variables added to clone, in the original copy.', () => {
+
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someVariable',
+            'number',
+            123,
+            true,
+            clonedScope
+        );
+        variableBlock.execute();
+
+        const cloneHasVariable = clonedScope.hasVariable('someVariable');
+        const originalHasVariable = scope.hasVariable('someVariable');
+
+        expect(cloneHasVariable).toStrictEqual(true);
+        expect(originalHasVariable).toStrictEqual(false);
+
+    });
+
+    it('should not add variables added to original copy, in the cloned.', () => {
+
+        const variableBlock = new VariableBlock(
+            VariableBlockType.declare,
+            'someVariable',
+            'number',
+            123,
+            true,
+            scope
+        );
+        variableBlock.execute();
+
+        const originalHasVariable = scope.hasVariable('someVariable');
+        const cloneHasVariable = clonedScope.hasVariable('someVariable');
+
+        expect(originalHasVariable).toStrictEqual(true);
+        expect(cloneHasVariable).toStrictEqual(false);
+
+    });
+
 });

@@ -1,18 +1,40 @@
 import { Variable } from "src/models/Variable";
 
 import { bugReporter } from "src/language-bug-handling";
+import { Block } from "src/blocks/Block";
 
 export class Scope {
     variables: { [key: string]: Variable } = {};
     parentScope: Scope | null = null;
 
-    // functions
-    // TODO
+    functions: { [key: string]: Block } = {};
+
+    shallowClone(): Scope {
+        const newScope = new Scope();
+
+        if (this.parentScope) {
+            newScope.parentScope = this.parentScope;
+        }
+        newScope.variables = { ...this.variables };
+        newScope.functions = { ...this.functions };
+
+        return newScope;
+    }
 
     constructor(parentScope?: Scope) {
         if (parentScope) {
             this.parentScope = parentScope as Scope;
         }
+    }
+
+    hasFunction(functionName: string): boolean {
+        // TODO
+        throw new Error('Not implemented error.')
+    }
+
+    getFunction(functionName: string): Block {
+        // TODO
+        throw new Error('Not implemented error.')
     }
 
     hasVariable(variableName: string): boolean {
