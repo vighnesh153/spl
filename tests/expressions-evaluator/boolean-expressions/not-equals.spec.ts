@@ -1,6 +1,5 @@
 import { Scope } from "src/models/Scope";
 import { NotEquals } from "src/expression-evaluators/boolean-expressions/not-equals";
-import { DoubleEquals } from "src/expression-evaluators/boolean-expressions/double-equals";
 import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
 
 describe('check the tryEvaluate functionality of not equals.', () => {
