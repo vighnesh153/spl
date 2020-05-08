@@ -61,7 +61,7 @@ export class ParenthesisEvaluator extends ExpressionEvaluator {
             for (const evaluator of evaluators.expressionEvaluators) {
                 if (evaluator.tryEvaluate(insideExpression)) {
                     const result = evaluator.evaluate(insideExpression).toString();
-                    return text.replace(`(${insideExpression})`, result);
+                    return text.replace(`(${insideExpression})`, ` ${result} `);
                 }
             }
 
