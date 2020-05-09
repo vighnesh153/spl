@@ -55,7 +55,7 @@ export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
                 for (const evaluator of this.expressionEvaluators) {
                     if (evaluator.tryEvaluate(text)) {
                         parsedByAny = true;
-                        text = evaluator.evaluate(text);
+                        text = "" +  evaluator.evaluate(text);
                         break;
                     }
                 }

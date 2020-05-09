@@ -47,6 +47,11 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
     private tryParseExpressionBasedArray(text: string): boolean {
         const trimmed = text.trim();
 
+        if (trimmed.startsWith('[') === false ||
+            trimmed.endsWith(']') === false) {
+            return false;
+        }
+
         // Remove the start and end brackets
         const innerContent = trimmed.slice(1, trimmed.length - 1).trim();
 
