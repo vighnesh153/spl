@@ -1,6 +1,6 @@
 import { DoubleEquals } from "src/expression-evaluators/boolean-expressions/double-equals";
 import { Scope } from "src/models/Scope";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check the tryEvaluate functionality of double equals.', () => {
 

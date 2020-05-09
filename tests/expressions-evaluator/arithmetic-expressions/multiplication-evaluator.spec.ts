@@ -1,5 +1,5 @@
 import { Scope } from "src/models/Scope";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 import { MultiplicationEvaluator } from "src/expression-evaluators/arithmetic-expressions/multiplication-evaluator";
 
 describe('check the tryEvaluate functionality of multiplication evaluator.', () => {

@@ -1,5 +1,5 @@
 import { Scope } from "src/models/Scope";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 import { AdditionEvaluator } from "src/expression-evaluators/arithmetic-expressions/addition-evaluator";
 
 describe('check the tryEvaluate functionality of addition evaluator.', () => {

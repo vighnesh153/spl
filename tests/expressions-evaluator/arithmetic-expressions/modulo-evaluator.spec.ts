@@ -1,5 +1,5 @@
 import { Scope } from "src/models/Scope";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 import { ModuloEvaluator } from "src/expression-evaluators/arithmetic-expressions/modulo-evaluator";
 
 describe('check the tryEvaluate functionality of modulo evaluator.', () => {

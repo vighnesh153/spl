@@ -1,7 +1,7 @@
 import { Scope } from "src/models/Scope";
 import { LessThanOrEqual } from "src/expression-evaluators/boolean-expressions/less-than-or-equal";
 import { LessThan } from "src/expression-evaluators/boolean-expressions/less-than";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check the tryEvaluate functionality of less-than-or-equal.', () => {
 

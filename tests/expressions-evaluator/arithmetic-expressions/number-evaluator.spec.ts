@@ -1,6 +1,6 @@
 import { NumberEvaluator } from "src/expression-evaluators/arithmetic-expressions/number-evaluator";
 import { Scope } from "src/models/Scope";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check the tryEvaluate functionality of number evaluator.', () => {
 

@@ -1,4 +1,4 @@
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 import { StringExpressionEvaluator } from "src/expression-evaluators/string-expression-evaluator";
 import { Scope } from "src/models/Scope";
 

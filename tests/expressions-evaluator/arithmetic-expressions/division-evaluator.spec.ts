@@ -1,5 +1,5 @@
 import { Scope } from "src/models/Scope";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 import { DivisionEvaluator } from "src/expression-evaluators/arithmetic-expressions/division-evaluator";
 
 describe('check the tryEvaluate functionality of division evaluator.', () => {

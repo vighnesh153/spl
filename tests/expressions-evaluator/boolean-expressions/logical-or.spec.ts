@@ -1,7 +1,7 @@
 import { Scope } from "src/models/Scope";
 import { LogicalOr } from "src/expression-evaluators/boolean-expressions/logical-or";
 import { LogicalAnd } from "src/expression-evaluators/boolean-expressions/logical-and";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check the tryEvaluate functionality of logical-and.', () => {
 

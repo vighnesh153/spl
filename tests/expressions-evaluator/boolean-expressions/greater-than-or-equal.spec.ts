@@ -1,7 +1,7 @@
 import { Scope } from "src/models/Scope";
 import { GreaterThanOrEqual } from "src/expression-evaluators/boolean-expressions/greater-than-or-equal";
 import { GreaterThan } from "src/expression-evaluators/boolean-expressions/greater-than";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check the tryEvaluate functionality of greater-than-or-equal.', () => {
 

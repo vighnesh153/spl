@@ -1,4 +1,4 @@
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 import { Scope } from "src/models/Scope";
 import { Block } from "src/blocks/Block";

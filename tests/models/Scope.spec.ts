@@ -1,6 +1,6 @@
 import { Scope } from "src/models/Scope";
 import { Variable } from "src/models/Variable";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check hasVariable functionality of scope.', () => {
 

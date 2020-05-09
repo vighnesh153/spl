@@ -3,7 +3,7 @@ import { Block } from "src/blocks/Block";
 
 import { OutputBuffer } from "src/models/OutputBuffer";
 import { DisplayBlock } from "src/blocks/display-block";
-import { VariableBlock, VariableBlockType } from "src/blocks/variable-block";
+import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 
 describe('check functionality of display block.', () => {
 

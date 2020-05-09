@@ -30,7 +30,7 @@ export class VariableBlock extends Block {
         }
     }
 
-    private declare(): void {
+    protected declare(): void {
         if (this.scope.hasVariable(this.variableName)) {
             throw new Error('Trying to declare existing variable.');
         }
@@ -41,7 +41,7 @@ export class VariableBlock extends Block {
         }
     }
 
-    private set(): void {
+    protected set(): void {
         if (this.scope.hasVariable(this.variableName) === false) {
             throw new Error('Trying to set value of not-declared variable.')
         } else {
