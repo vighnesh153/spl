@@ -3,6 +3,7 @@ import { VariableDeclarationParser } from "src/parsers/block-parsers/variable-de
 import { Scope } from "src/models/Scope";
 import { LineOfCode } from "src/models/LineOfCode";
 import { VariableBlock } from "src/blocks/variable-blocks/variable-block";
+import { ArrayVariableBlock } from "src/blocks/variable-blocks/array-variable-block";
 
 describe('should parse the matching declaration statement.', () => {
 
@@ -34,8 +35,12 @@ describe('should parse the matching declaration statement.', () => {
         expect(result).toStrictEqual(false);
     });
 
-    test('should return true if correct statement is passed.', () => {
-        linesOfCode[0].value = 'let number a be 111'
+    test.each([
+        'let number a be 111',
+        'let array of number, A, be [1, 2, 3]',
+        'let array of number, A, be []',
+    ])('should return true if correct statement is passed.', (input: string) => {
+        linesOfCode[0].value = input;
 
         expect(blockParser.tryParse()).toStrictEqual(true);
     });
@@ -61,5 +66,25 @@ describe('should return correct block.', () => {
         expect(block.value).toStrictEqual('Hello World!');
         expect(block.variableName).toStrictEqual('s');
         expect(block.typeOfVariable).toStrictEqual('string');
+    });
+
+    test('should return correct array block.', () => {
+        linesOfCode[0].value = "let array of number, A, be [1, 2, 3]";
+
+        const block = blockParser.parse() as ArrayVariableBlock;
+        expect(block.value).toStrictEqual([1, 2, 3]);
+        expect(block.variableName).toStrictEqual('A');
+        expect(block.typeOfVariable).toStrictEqual('array');
+        expect(block.typeOfArray).toStrictEqual('number');
+    });
+
+    test('should return correct array block even if values are empty.', () => {
+        linesOfCode[0].value = "let array of number, A, be []";
+
+        const block = blockParser.parse() as ArrayVariableBlock;
+        expect(block.value).toStrictEqual([]);
+        expect(block.variableName).toStrictEqual('A');
+        expect(block.typeOfVariable).toStrictEqual('array');
+        expect(block.typeOfArray).toStrictEqual('number');
     });
 });

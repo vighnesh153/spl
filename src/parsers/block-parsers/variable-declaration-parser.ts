@@ -87,7 +87,7 @@ export class VariableDeclarationParser extends BlockParser {
     parseArray(): Block {
         const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
 
-        const result = lineUnderTest.value.match(VariableDeclarationParser.primitiveRegex);
+        const result = lineUnderTest.value.match(VariableDeclarationParser.arrayRegex);
         if (result) {
             const arrayType = result[1];
             const variableName = result[2];
@@ -103,7 +103,8 @@ export class VariableDeclarationParser extends BlockParser {
                 throw new Error('Invalid value assigned to variable at line: ' + lineUnderTest.number);
             }
 
-            if (valueEvaluator.getType(value) !== arrayType) {
+            const valueType = valueEvaluator.getType(value);
+            if (valueType !== arrayType && valueType !== 'any') {
                 throw new Error('Datatype of variable doesn\'t match ' +
                     'with value assigned, at line: ' + lineUnderTest.number);
             }
