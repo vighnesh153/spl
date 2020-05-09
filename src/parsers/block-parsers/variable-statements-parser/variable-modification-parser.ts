@@ -99,6 +99,9 @@ export class VariableModificationParser extends BlockParser {
             const newValues = [...array.value];
             newValues[index] = value;
 
+            // Remove the line as it is done parsing.
+            this.lineOfCodes.pop();
+
             return new VariableBlock(
                 VariableBlockType.set,
                 arrayName,

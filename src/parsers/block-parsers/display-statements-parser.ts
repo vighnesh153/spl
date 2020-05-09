@@ -27,6 +27,9 @@ export class DisplayStatementsParser extends BlockParser {
             const result = lineUnderTest.value.trimRight()
                 .match(DisplayStatementsParser.regex);
             if (result) {
+                // Remove the line as it is done parsing.
+                this.lineOfCodes.pop();
+
                 // const values = result[1].split(',');
                 // return new DisplayBlock(values, this.scope);
                 return new DisplayBlock([result[1]], this.scope);
