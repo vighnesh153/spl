@@ -3,7 +3,7 @@ import { Scope } from "src/models/Scope";
 import { LineOfCode } from "src/models/LineOfCode";
 import { VariableBlock, VariableBlockType } from "src/blocks/variable-blocks/variable-block";
 import { ArrayVariableBlock } from "src/blocks/variable-blocks/array-variable-block";
-import { VariableModificationParser } from "src/parsers/block-parsers/variable-modification-parser";
+import { VariableModificationParser } from "src/parsers/block-parsers/variable-statements-parser/variable-modification-parser";
 
 describe('should parse the matching modification statement.', () => {
 

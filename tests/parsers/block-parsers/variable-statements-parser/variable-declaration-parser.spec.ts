@@ -1,5 +1,5 @@
 import { BlockParser } from "src/parsers/block-parsers/block-parser";
-import { VariableDeclarationParser } from "src/parsers/block-parsers/variable-declaration-parser";
+import { VariableDeclarationParser } from "src/parsers/block-parsers/variable-statements-parser/variable-declaration-parser";
 import { Scope } from "src/models/Scope";
 import { LineOfCode } from "src/models/LineOfCode";
 import { VariableBlock } from "src/blocks/variable-blocks/variable-block";
