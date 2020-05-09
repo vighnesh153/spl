@@ -12,15 +12,15 @@ export class ArrayVariableBlock extends VariableBlock {
         super(typeOfBlock, variableName, typeOfVariable, value, isPermanent, parentScope);
     }
 
-    protected set(): void {
-        if (this.scope.hasVariable(this.variableName) === false) {
-            throw new Error('Trying to set value of not-declared variable.')
-        } else {
-            const variable = this.scope.getVariable(this.variableName);
-            if (variable.isPermanent) {
-                throw new Error('Tried to modify a permanent variable.')
-            }
-            this.scope.getVariable(this.variableName).value = this.value;
+    protected declare(): void {
+        if (this.scope.hasVariable(this.variableName)) {
+            throw new Error('Trying to declare existing variable.');
+        }
+        this.scope.variables[this.variableName] = {
+            type: this.typeOfVariable,
+            value: this.value,
+            isPermanent: this.isPermanent,
+            arrayType: this.typeOfArray
         }
     }
 }
