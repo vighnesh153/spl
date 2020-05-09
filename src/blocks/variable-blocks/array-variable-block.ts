@@ -8,7 +8,7 @@ export class ArrayVariableBlock extends VariableBlock {
                 public value: any,
                 public isPermanent: boolean,
                 parentScope: Scope,
-                public typeOfArray: 'string' | 'number' | 'boolean') {
+                public typeOfArray: string) {
         super(typeOfBlock, variableName, typeOfVariable, value, isPermanent, parentScope);
     }
 

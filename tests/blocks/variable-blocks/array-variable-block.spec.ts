@@ -14,8 +14,7 @@ describe('check functionality of variable block', () => {
             [1, 23, 45 + 55],
             false,
             new Scope(),
-            'number'
-        );
+            'number');
     });
 
     test('should declare an array variable in scope when ' +
@@ -35,15 +34,7 @@ describe('check functionality of variable block', () => {
         variableBlock.execute();
 
         // Set
-        variableBlock = new ArrayVariableBlock(
-            VariableBlockType.set,
-            'Some_Variable_Name',
-            'number',
-            [1, 2],
-            false,
-            variableBlock.scope,
-            'number'
-        );
+        variableBlock = new ArrayVariableBlock(VariableBlockType.set, 'Some_Variable_Name', 'number', [1, 2], false, variableBlock.scope, 'number');
         variableBlock.execute();
 
         const variable = variableBlock.scope.getVariable('Some_Variable_Name');
