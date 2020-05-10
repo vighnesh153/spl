@@ -2,6 +2,7 @@ import { reverseString } from "src/helpers/reverse-string";
 import { parseInitialNumberOrIdentifier } from "src/helpers/parse-initial-number-or-identifier";
 import { NumberEvaluator } from "src/expression-evaluators/arithmetic-expressions/number-evaluator";
 import { Scope } from "src/models/Scope";
+import { ArithmeticExpressionEvaluator } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
 
 export const getPreviousAndNextNumberOrIdentifier =
     (text: string, operator: string, scope: Scope):
@@ -13,16 +14,16 @@ export const getPreviousAndNextNumberOrIdentifier =
         const lhs = reverseString(extractedIdentifierOrNumber);
         const rhs = parseInitialNumberOrIdentifier(individualComponents[1], false);
 
-        const numberEvaluator = new NumberEvaluator(scope);
+        const arithmeticExpressionEvaluator = new ArithmeticExpressionEvaluator(scope);
 
-        if (numberEvaluator.tryEvaluate(lhs) === false ||
-            numberEvaluator.tryEvaluate(rhs) === false) {
+        if (arithmeticExpressionEvaluator.tryEvaluate(lhs) === false ||
+            arithmeticExpressionEvaluator.tryEvaluate(rhs) === false) {
             throw new Error("Can't compare non-number symbols.");
         }
 
         return {
-            prev: numberEvaluator.evaluate(lhs),
-            next: numberEvaluator.evaluate(rhs),
+            prev: arithmeticExpressionEvaluator.evaluate(lhs),
+            next: arithmeticExpressionEvaluator.evaluate(rhs),
             originalExpression: `${lhs}${operator}${rhs}`
         };
     }
