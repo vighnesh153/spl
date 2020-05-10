@@ -41,7 +41,7 @@ export class LoopForXTimesParser extends BlockParser {
                 break;
             }
         }
-        return block;
+        return block.reverse();
     }
 
     parseNoCounterLoop(): Block {

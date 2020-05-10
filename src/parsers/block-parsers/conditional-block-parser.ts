@@ -30,7 +30,7 @@ export class ConditionalBlockParser extends BlockParser {
                 break;
             }
         }
-        return block;
+        return block.reverse();
     }
 
     private getBlocksAndConditions(): { blocks: LineOfCode[][], conditions: string[] } {
