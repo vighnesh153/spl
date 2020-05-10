@@ -66,7 +66,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
             this.expressionEvaluators.forEach((evaluator, index) => {
                 if (isArrayValid === false) return;
 
-                if (evaluator.tryEvaluate(element)) {
+                if (evaluator.tryEvaluate(element) && parsedByAny === false) {
                     if (type === 'any') {
                         type = this.types[index];
                     } else if (type !== this.types[index]) {
