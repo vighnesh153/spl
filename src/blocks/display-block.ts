@@ -3,11 +3,6 @@ import { Scope } from "src/models/Scope";
 
 import { OutputBuffer } from "src/models/OutputBuffer";
 
-import { DatatypeParser } from "src/parsers/data-type-parsers/datatype-parser";
-import { BooleanParser } from "src/parsers/data-type-parsers/primitive-parsers/boolean-parser";
-import { NumberParser } from "src/parsers/data-type-parsers/primitive-parsers/number-parser";
-import { StringParser } from "src/parsers/data-type-parsers/primitive-parsers/string-parser";
-import { ArrayParser } from "src/parsers/data-type-parsers/non-primitive-parsers/array-parser";
 import { ExpressionEvaluator } from "src/expression-evaluators/expression-evaluator";
 import { ArrayExpressionEvaluator } from "src/expression-evaluators/array-expression-evaluator";
 import { ArithmeticExpressionEvaluator } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
