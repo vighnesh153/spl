@@ -24,6 +24,7 @@ describe('check the functionality of variable and display parsers.', () => {
         addLineOfCode("let boolean c be true");
         linesOfCode.reverse();
 
+        interpreter = new Interpreter(linesOfCode, scope);
         interpreter.interpret();
 
         expect(scope.hasVariable('a')).toStrictEqual(true);
@@ -44,6 +45,7 @@ describe('check the functionality of variable and display parsers.', () => {
         addLineOfCode("display c");
         linesOfCode.reverse();
 
+        interpreter = new Interpreter(linesOfCode, scope);
         interpreter.interpret();
 
         const output = OutputBuffer.instance.getAndFlush();
@@ -56,9 +58,40 @@ describe('check the functionality of variable and display parsers.', () => {
         addLineOfCode("display a");
         linesOfCode.reverse();
 
+        interpreter = new Interpreter(linesOfCode, scope);
         interpreter.interpret();
 
         const output = OutputBuffer.instance.getAndFlush();
         expect(output).toStrictEqual('153\n');
+    });
+
+    test('should loop over numbers and print just the even numbers.', () => {
+        addLineOfCode("let number a be 0");
+        addLineOfCode("loop while a < 10:");
+        addLineOfCode("    if a%2 == 0, then do:");
+        addLineOfCode("        display a");
+        addLineOfCode("    set a to a + 1");
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const output = OutputBuffer.instance.getAndFlush();
+        expect(output).toStrictEqual('0\n2\n4\n6\n8\n');
+    });
+
+    test('should loop over array and print just the multiples of 3.', () => {
+        addLineOfCode("let array of number, arr, be " +
+            "[1 ,2 , 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]");
+        addLineOfCode("for every elem in arr:");
+        addLineOfCode("    if elem%3 == 0, then do:");
+        addLineOfCode("        display elem");
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const output = OutputBuffer.instance.getAndFlush();
+        expect(output).toStrictEqual('3\n6\n9\n12\n');
     });
 });

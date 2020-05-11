@@ -4,6 +4,10 @@ import { BlockParser } from "src/parsers/block-parsers/block-parser";
 import { VariableDeclarationParser } from "src/parsers/block-parsers/variable-statements-parser/variable-declaration-parser";
 import { VariableModificationParser } from "src/parsers/block-parsers/variable-statements-parser/variable-modification-parser";
 import { DisplayStatementsParser } from "src/parsers/block-parsers/display-statements-parser";
+import { ConditionalBlockParser } from "src/parsers/block-parsers/conditional-block-parser";
+import { LoopForXTimesParser } from "src/parsers/block-parsers/loop-parsers/loop-for-x-times-parser";
+import { LoopWhileExpressionIsTrueParser } from "src/parsers/block-parsers/loop-parsers/loop-while-expression-is-true-parser";
+import { ForEveryLoopParser } from "src/parsers/block-parsers/loop-parsers/for-every-loop-parser";
 
 /*
  *
@@ -17,12 +21,28 @@ import { DisplayStatementsParser } from "src/parsers/block-parsers/display-state
 export class Interpreter {
     private readonly blockParsers: BlockParser[] = [];
 
+    private createCopyOfLinesOfCode(): void {
+        const copy: LineOfCode[] = [];
+        for (const loc of this.linesOfCode) {
+            const newLoc = new LineOfCode(loc.value, loc.number);
+            copy.push(newLoc);
+        }
+        this.linesOfCode = copy;
+    }
+
     constructor(private linesOfCode: LineOfCode[],
                 private scope: Scope) {
+
+        this.createCopyOfLinesOfCode();
 
         this.blockParsers.push(new VariableDeclarationParser(this.scope, this.linesOfCode));
         this.blockParsers.push(new VariableModificationParser(this.scope, this.linesOfCode));
         this.blockParsers.push(new DisplayStatementsParser(this.scope, this.linesOfCode));
+
+        this.blockParsers.push(new ConditionalBlockParser(this.linesOfCode, this.scope));
+        this.blockParsers.push(new LoopForXTimesParser(this.linesOfCode, this.scope));
+        this.blockParsers.push(new LoopWhileExpressionIsTrueParser(this.linesOfCode, this.scope));
+        this.blockParsers.push(new ForEveryLoopParser(this.linesOfCode, this.scope));
     }
 
     interpret(): void {
@@ -39,12 +59,21 @@ export class Interpreter {
 
         while (this.linesOfCode.length > 0) {
             const countOfLinesBeforeParsing = this.linesOfCode.length;
+            const lineUnderExecution = this.linesOfCode[this.linesOfCode.length - 1].number;
 
             for (const parser of this.blockParsers) {
                 if (parser.tryParse()) {
-                    const block = parser.parse();
-                    block.execute();
-                    break;
+                    try {
+                        const block = parser.parse();
+                        block.execute();
+                        break;
+                    } catch (e) {
+                        if (e.message.includes('line:')) {
+                            throw new Error(e.message)
+                        } else {
+                            throw new Error(e.message + '. At line: ' + lineUnderExecution);
+                        }
+                    }
                 }
             }
 
@@ -52,7 +81,7 @@ export class Interpreter {
 
             if (countOfLinesBeforeParsing === countOfLinesAfterParsing) {
                 const lastLine = this.linesOfCode[this.linesOfCode.length - 1];
-                throw new Error("Cannot process statement at line: " + lastLine.number);
+                throw new Error("Error in statement at line: " + lastLine.number);
             }
         }
     }
