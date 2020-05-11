@@ -4,6 +4,7 @@ import { BlockParser } from "src/parsers/block-parsers/block-parser";
 
 import { Block } from "src/blocks/Block";
 import { DisplayBlock } from "src/blocks/display-block";
+import { csvSplit } from "src/helpers/csv-split";
 
 
 export class DisplayStatementsParser extends BlockParser {
@@ -30,9 +31,8 @@ export class DisplayStatementsParser extends BlockParser {
                 // Remove the line as it is done parsing.
                 this.lineOfCodes.pop();
 
-                // const values = result[1].split(',');
-                // return new DisplayBlock(values, this.scope);
-                return new DisplayBlock([result[1]], this.scope);
+                const values = csvSplit(result[1]);
+                return new DisplayBlock(values, this.scope);
             }
 
             throw new Error(`Display statement can't be empty. At line: ` +

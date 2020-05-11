@@ -94,5 +94,15 @@ describe('check the parse functionality of display statement parser.', () => {
         expect(result).toStrictEqual('123\n');
     });
 
+    it('should display comma separated expressions.', () => {
+        linesOfCode[0].value = "display 'Case: ', 1, ', answer: ', [ 1, 2, 3, 4]";
+
+        const block = blockParser.parse();
+        block.execute();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual("Case: 1, answer: 1,2,3,4\n");
+    });
+
 });
 
