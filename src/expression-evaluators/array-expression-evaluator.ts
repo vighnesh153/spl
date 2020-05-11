@@ -6,6 +6,7 @@ import { ExpressionEvaluator } from "src/expression-evaluators/expression-evalua
 import { ArithmeticExpressionEvaluator } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
 import { BooleanExpressionEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
 import { StringExpressionEvaluator } from "src/expression-evaluators/string-expression-evaluator";
+import { csvSplit } from "src/helpers/csv-split";
 
 export class ArrayExpressionEvaluator extends ExpressionEvaluator {
     private static arrayParser = ArrayParser.instance
@@ -55,7 +56,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
         // Remove the start and end brackets
         const innerContent = trimmed.slice(1, trimmed.length - 1).trim();
 
-        const arrayElements = innerContent.split(',');
+        const arrayElements = csvSplit(innerContent);
 
         let type: string = 'any';
         let isArrayValid = true;
@@ -87,7 +88,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
 
         // Remove the start and end brackets
         const innerContent = trimmed.slice(1, trimmed.length - 1).trim();
-        const arrayElements = innerContent.split(',');
+        const arrayElements = csvSplit(innerContent);
 
         const result: any[] = [];
 

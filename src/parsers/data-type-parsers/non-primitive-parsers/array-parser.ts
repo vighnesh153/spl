@@ -5,6 +5,7 @@ import { BooleanParser } from "../primitive-parsers/boolean-parser";
 import { StringParser } from "../primitive-parsers/string-parser";
 
 import { bugReporter } from "src/language-bug-handling";
+import { csvSplit } from "src/helpers/csv-split";
 
 export class ArrayParser extends DatatypeParser {
     static instance = new ArrayParser();
@@ -36,7 +37,7 @@ export class ArrayParser extends DatatypeParser {
             return true;
         }
 
-        const arrayElements = innerContent.split(',');
+        const arrayElements = csvSplit(innerContent);
         let type: string = 'any';
         let isArrayValid = true;
         arrayElements.forEach(element => {
@@ -68,7 +69,7 @@ export class ArrayParser extends DatatypeParser {
             const innerContent = trimmed.slice(1, trimmed.length - 1).trim();
             const resultantArray: any[] = [];
 
-            innerContent.split(',').forEach(element => {
+            csvSplit(innerContent).forEach(element => {
                 let isParsedAlready = false;
                 this.primitiveParsers.forEach(parser => {
                     if (isParsedAlready) return;

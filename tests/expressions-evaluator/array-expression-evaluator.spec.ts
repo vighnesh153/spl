@@ -24,7 +24,6 @@ describe('check the tryEvaluate functionality of array expression evaluator.', (
     test.each([
         [' [  1, 2, true     , 5     ]    '],
         [' [  true,    false     ,     false         '],
-        [' [  true,         ,     false      ]   '],
         ["   [    'aaa'       'b' ]  "],
     ])('should evaluate to false.', (input: string) => {
         const result = arrayExpressionEvaluator.tryEvaluate(input);
