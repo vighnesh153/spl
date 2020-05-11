@@ -47,11 +47,10 @@ export class ForEveryLoopParser extends BlockParser {
     }
 
     private static getRandomString(): string {
-        // const n1 = Math.floor(Math.random() * Math.pow(10, 10));
-        // const n2 = Math.floor(Math.random() * Math.pow(10, 10));
-        // const n3 = Math.floor(Math.random() * Math.pow(10, 10));
-        // return `_${n1}_array_${n2}_array_${n3}`;
-        return 'array__' + Math.floor(Math.random() * 100);
+        const n1 = Math.floor(Math.random() * Math.pow(10, 10));
+        const n2 = Math.floor(Math.random() * Math.pow(10, 10));
+        const n3 = Math.floor(Math.random() * Math.pow(10, 10));
+        return `_${n1}_array_${n2}_array_${n3}`;
     }
 
     private parseForEachLoop(): Block {
