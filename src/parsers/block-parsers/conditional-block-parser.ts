@@ -15,8 +15,8 @@ export class ConditionalBlockParser extends BlockParser {
     }
 
     tryParse(): boolean {
-        const { conditions } = this.getBlocksAndConditions();
-        return conditions.length > 0;
+        const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
+        return ConditionalBlockParser.ifRegex.test(lineUnderTest.value);
     }
 
     private getIndentedBlock(): LineOfCode[] {

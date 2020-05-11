@@ -32,7 +32,7 @@ export class ConditionBlock extends Block {
             }
 
             if (evaluator.evaluate(condition)) {
-                new Interpreter(this.blocks[i], this.scope).interpret();
+                new Interpreter(this.blocks[i].slice(), this.scope).interpret();
                 return;
             }
         }
