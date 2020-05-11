@@ -2,12 +2,13 @@ import { Variable } from "src/models/Variable";
 
 import { bugReporter } from "src/language-bug-handling";
 import { Block } from "src/blocks/Block";
+import { FunctionBlock } from "src/blocks/function-block";
 
 export class Scope {
     variables: { [key: string]: Variable } = {};
     parentScope: Scope | null = null;
 
-    functions: { [key: string]: Block } = {};
+    functions: { [key: string]: FunctionBlock } = {};
 
     shallowClone(): Scope {
         const newScope = new Scope();
@@ -28,13 +29,27 @@ export class Scope {
     }
 
     hasFunction(functionName: string): boolean {
-        // TODO
-        throw new Error('Not implemented error.')
+        if (this.functions.hasOwnProperty(functionName)) {
+            return true;
+        }
+        return this.parentScope === null
+            ? false
+            : (this.parentScope as Scope).hasFunction(functionName);
     }
 
-    getFunction(functionName: string): Block {
-        // TODO
-        throw new Error('Not implemented error.')
+    getFunction(functionName: string): FunctionBlock {
+        if (this.functions.hasOwnProperty(functionName)) {
+            return this.functions[functionName];
+        } else if (this.parentScope !== null){
+            return (this.parentScope as Scope).getFunction(functionName);
+        } else {
+            bugReporter.report('ACCESS_UNDEFINED_SYMBOL');
+
+            // Unreachable return statement, anyway. Added just to make
+            // Typescript happy because, it doesn't know that
+            // the above line will throw error.
+            throw new Error('Unreachable block');
+        }
     }
 
     hasVariable(variableName: string): boolean {
