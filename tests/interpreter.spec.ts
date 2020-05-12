@@ -185,4 +185,17 @@ describe('check the functionality of variable and display parsers.', () => {
         const result = OutputBuffer.instance.getAndFlush();
         expect(result).toStrictEqual('1\n22\n333\n4444\n55555\n');
     });
+
+    test('should correctly find the length of the array.', () => {
+        addLineOfCode(`let array of number, arr, be [1, 22, 333, 4444]`)
+        addLineOfCode(`let number size be length of arr`)
+        addLineOfCode('display size')
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual('4\n');
+    });
 });

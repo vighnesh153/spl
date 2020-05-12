@@ -12,6 +12,7 @@ import { SubtractionEvaluator } from "src/expression-evaluators/arithmetic-expre
 import { NumberEvaluator } from "src/expression-evaluators/arithmetic-expressions/number-evaluator";
 import { NumberParser } from "src/parsers/data-type-parsers/primitive-parsers/number-parser";
 import { FunctionExpressionEvaluator } from "src/expression-evaluators/function-expression-evaluator";
+import { LengthOfArrayEvaluator } from "src/expression-evaluators/arithmetic-expressions/length-of-array-evaluator";
 
 export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
     readonly expressionEvaluators: ExpressionEvaluator[];
@@ -22,6 +23,8 @@ export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
 
         // Following order matters
         this.expressionEvaluators.push(new FunctionExpressionEvaluator(this.scope));
+
+        this.expressionEvaluators.push(new LengthOfArrayEvaluator(this.scope));
 
         this.expressionEvaluators.push(new ParenthesisEvaluator(this.scope, 'arithmetic'));
 
