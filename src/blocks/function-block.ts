@@ -57,7 +57,7 @@ export class FunctionBlock extends Block {
 
     getResult(): Variable {
         if (this.shouldReturnSomething === false) {
-            throw 'This functions returns nothing according to definition.';
+            throw 'Function returns nothing according to definition.';
         }
         return this.result as Variable;
     }

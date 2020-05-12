@@ -14,6 +14,7 @@ import { GreaterThanOrEqual } from "src/expression-evaluators/boolean-expression
 import { LessThan } from "src/expression-evaluators/boolean-expressions/less-than";
 import { LessThanOrEqual } from "src/expression-evaluators/boolean-expressions/less-than-or-equal";
 import { BooleanEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-evaluator";
+import { FunctionExpressionEvaluator } from "src/expression-evaluators/function-expression-evaluator";
 
 export class BooleanExpressionEvaluator extends ExpressionEvaluator {
     readonly expressionEvaluators: ExpressionEvaluator[];
@@ -23,6 +24,8 @@ export class BooleanExpressionEvaluator extends ExpressionEvaluator {
         this.expressionEvaluators = [];
 
         // Following order matters
+        this.expressionEvaluators.push(new FunctionExpressionEvaluator(this.scope));
+
         this.expressionEvaluators.push(new ParenthesisEvaluator(this.scope, 'boolean'));
 
         this.expressionEvaluators.push(new DoubleEquals(this.scope));

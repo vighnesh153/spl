@@ -7,6 +7,7 @@ import { ArithmeticExpressionEvaluator } from "src/expression-evaluators/arithme
 import { BooleanExpressionEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
 import { StringExpressionEvaluator } from "src/expression-evaluators/string-expression-evaluator";
 import { csvSplit } from "src/helpers/csv-split";
+import { FunctionExpressionEvaluator } from "src/expression-evaluators/function-expression-evaluator";
 
 export class ArrayExpressionEvaluator extends ExpressionEvaluator {
     private static arrayParser = ArrayParser.instance
@@ -26,6 +27,8 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
         this.expressionEvaluators.push(new ArithmeticExpressionEvaluator(this.scope));
         this.expressionEvaluators.push(new BooleanExpressionEvaluator(this.scope));
         this.expressionEvaluators.push(new StringExpressionEvaluator(this.scope));
+
+        this.expressionEvaluators.push(new FunctionExpressionEvaluator(this.scope));
     }
 
     getType(text: string): string {
