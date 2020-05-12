@@ -18,11 +18,8 @@ export class StringExpressionEvaluator extends ExpressionEvaluator {
         if (StringExpressionEvaluator.stringParser.tryParse(trimmed)) {
             return true;
         }
-        if (this.scope.hasVariable(trimmed) &&
-            this.scope.getVariable(trimmed).type === 'string') {
-            return true
-        }
-        return this.arrayIndexEvaluator.tryEvaluate(text.trim());
+        return this.scope.hasVariable(trimmed) &&
+            this.scope.getVariable(trimmed).type === 'string';
     }
 
     evaluate(text: string): any {
@@ -31,10 +28,7 @@ export class StringExpressionEvaluator extends ExpressionEvaluator {
             if (StringExpressionEvaluator.stringParser.tryParse(trimmed)) {
                 return StringExpressionEvaluator.stringParser.parse(trimmed);
             }
-            if (this.scope.hasVariable(trimmed)) {
-                return this.scope.getVariable(trimmed).value;
-            }
-            return this.arrayIndexEvaluator.evaluate(trimmed);
+            return this.scope.getVariable(trimmed).value;
         } else {
             bugReporter.report('EVALUATING_INVALID_STRING');
         }

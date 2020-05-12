@@ -155,4 +155,19 @@ describe('check the functionality of variable and display parsers.', () => {
         const result = OutputBuffer.instance.getAndFlush();
         expect(result).toStrictEqual('1\n22\n333\n4444\n55555\n');
     });
+
+    test('should correctly pop element from array.', () => {
+        addLineOfCode(`let array of number, arr, be [1, 22, 333, 4444, 55555]`)
+        addLineOfCode(`pop from arr`)
+        addLineOfCode(`pop from arr`)
+        addLineOfCode('for every item in arr:')
+        addLineOfCode('    display item')
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual('1\n22\n333\n');
+    });
 });

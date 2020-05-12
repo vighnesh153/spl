@@ -17,16 +17,16 @@ export class ArrayIndexEvaluator extends ExpressionEvaluator {
             const arrayName = result[1].trim();
 
             if (this.scope.hasVariable(arrayName) === false) {
-                throw new Error(`Undefined symbol: ${arrayName}`);
+                return "";
             }
 
             if (this.scope.getVariable(arrayName).type !== 'array') {
-                throw new Error(`${arrayName} is not an array.`);
+                return "";
             }
 
             return this.scope.getVariable(arrayName).arrayType as string;
         }
-        throw new Error('Invalid statement.');
+        return "";
     }
 
     tryEvaluate(text: string): boolean {

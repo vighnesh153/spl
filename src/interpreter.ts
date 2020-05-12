@@ -13,6 +13,7 @@ import { FunctionExecutionParser } from "src/parsers/block-parsers/functions/fun
 import { FunctionDefinitionBlockParser } from "src/parsers/block-parsers/functions/function-definition-block-parser";
 import { BreakStatementParser } from "src/parsers/block-parsers/loop-parsers/break-statement-parser";
 import { ContinueStatementParser } from "src/parsers/block-parsers/loop-parsers/continue-statement-parser";
+import { PopFromArrayParser } from "src/parsers/block-parsers/array-operations/pop-from-array-parser";
 
 /*
  *
@@ -39,6 +40,8 @@ export class Interpreter {
                 private scope: Scope) {
 
         this.createCopyOfLinesOfCode();
+
+        this.blockParsers.push(new PopFromArrayParser(this.linesOfCode, this.scope));
 
         this.blockParsers.push(new FunctionExecutionParser(this.scope, this.linesOfCode));
         this.blockParsers.push(new FunctionDefinitionBlockParser(this.scope, this.linesOfCode));
