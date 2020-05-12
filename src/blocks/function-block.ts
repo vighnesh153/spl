@@ -59,7 +59,12 @@ export class FunctionBlock extends Block {
         if (this.shouldReturnSomething === false) {
             throw 'Function returns nothing according to definition.';
         }
-        return this.result as Variable;
+        if (this.result === undefined) {
+            throw 'Function didn\'t return anything.';
+        }
+        const result = this.result as Variable;
+        this.result = undefined;
+        return result;
     }
 
     private static tryDefine(typeAndName: string, value: string, scope: Scope): void {
