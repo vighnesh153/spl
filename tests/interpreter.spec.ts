@@ -8,14 +8,16 @@ describe('check the functionality of variable and display parsers.', () => {
     let linesOfCode: LineOfCode[];
     let scope: Scope;
     let interpreter: Interpreter;
+    let lineNumber: number;
     beforeEach(() => {
         linesOfCode = [];
         scope = new Scope();
+        lineNumber = 1;
         interpreter = new Interpreter(linesOfCode, scope);
     });
 
     const addLineOfCode = (line: string) => {
-        linesOfCode.push(new LineOfCode(line, Math.random()));
+        linesOfCode.push(new LineOfCode(line, lineNumber++));
     }
 
     test('should set the variables.', () => {
@@ -139,5 +141,18 @@ describe('check the functionality of variable and display parsers.', () => {
 
         const result = OutputBuffer.instance.getAndFlush();
         expect(result).toStrictEqual('1\n3\n4\n5\n');
+    });
+
+    test('should correctly index elements from array.', () => {
+        addLineOfCode(`let array of number, arr, be [1, 22, 333, 4444, 55555]`)
+        addLineOfCode('for every item in [1, 2, 3, 4, 5]:')
+        addLineOfCode('    display arr[item - 1]')
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual('1\n22\n333\n4444\n55555\n');
     });
 });
