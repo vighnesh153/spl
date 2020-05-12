@@ -112,4 +112,32 @@ describe('check the functionality of variable and display parsers.', () => {
         const variable = scope.getVariable('fiveFactorial');
         expect(variable.value).toStrictEqual(120);
     });
+
+    test('should break out of the loop if needed.', () => {
+        addLineOfCode('for every item in [1, 2, 3, 4, 5]:')
+        addLineOfCode('    if item > 2, then do:')
+        addLineOfCode('        break')
+        addLineOfCode('    display item')
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual('1\n2\n');
+    });
+
+    test('should continue the loop from next iteration.', () => {
+        addLineOfCode('for every item in [1, 2, 3, 4, 5]:')
+        addLineOfCode('    if item == 2, then do:')
+        addLineOfCode('        continue')
+        addLineOfCode('    display item')
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual('1\n3\n4\n5\n');
+    });
 });

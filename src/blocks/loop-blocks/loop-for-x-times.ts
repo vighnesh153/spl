@@ -41,7 +41,17 @@ export class LoopForXTimes extends Block {
             if (this.hasCounterVariable) {
                 this.setCounterVariableTo(counter + 1, newScope);
             }
-            new Interpreter(this.childLinesOfCode.slice(), newScope).interpret();
+            try {
+                new Interpreter(this.childLinesOfCode.slice(), newScope).interpret();
+            } catch (e) {
+                if (e.message === 'break') {
+                    break;
+                }
+                if (e.message === 'continue') {
+                    continue;
+                }
+                throw e;
+            }
         }
     }
 

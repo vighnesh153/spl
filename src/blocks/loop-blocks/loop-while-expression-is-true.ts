@@ -25,7 +25,17 @@ export class LoopWhileExpressionIsTrue extends Block {
 
         throwIfExpressionIsInvalid();
         while (evaluator.evaluate(this.expression)) {
-            new Interpreter(this.childLinesOfCode.slice(), this.scope).interpret();
+            try {
+                new Interpreter(this.childLinesOfCode.slice(), this.scope).interpret();
+            } catch (e) {
+                if (e.message === 'break') {
+                    break;
+                }
+                if (e.message === 'continue') {
+                    continue;
+                }
+                throw e;
+            }
             throwIfExpressionIsInvalid();
         }
     }

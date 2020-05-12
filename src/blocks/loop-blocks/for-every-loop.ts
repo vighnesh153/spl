@@ -60,7 +60,17 @@ export class ForEveryLoop extends Block {
             this.setItemVariableTo(item, newScope);
             this.setIndexVariableTo(index, newScope);
 
-            new Interpreter(this.childLinesOfCode.slice(), newScope).interpret();
+            try {
+                new Interpreter(this.childLinesOfCode.slice(), newScope).interpret();
+            } catch (e) {
+                if (e.message === 'break') {
+                    break;
+                }
+                if (e.message === 'continue') {
+                    continue;
+                }
+                throw e;
+            }
         }
     }
 

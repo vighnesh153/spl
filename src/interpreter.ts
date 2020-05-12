@@ -11,6 +11,8 @@ import { ForEveryLoopParser } from "src/parsers/block-parsers/loop-parsers/for-e
 import { ReturnParser } from "src/parsers/block-parsers/functions/return-parser";
 import { FunctionExecutionParser } from "src/parsers/block-parsers/functions/function-execution-parser";
 import { FunctionDefinitionBlockParser } from "src/parsers/block-parsers/functions/function-definition-block-parser";
+import { BreakStatementParser } from "src/parsers/block-parsers/loop-parsers/break-statement-parser";
+import { ContinueStatementParser } from "src/parsers/block-parsers/loop-parsers/continue-statement-parser";
 
 /*
  *
@@ -47,6 +49,9 @@ export class Interpreter {
         this.blockParsers.push(new DisplayStatementsParser(this.scope, this.linesOfCode));
 
         this.blockParsers.push(new ConditionalBlockParser(this.linesOfCode, this.scope));
+
+        this.blockParsers.push(new BreakStatementParser(this.scope, this.linesOfCode));
+        this.blockParsers.push(new ContinueStatementParser(this.scope, this.linesOfCode));
         this.blockParsers.push(new LoopForXTimesParser(this.linesOfCode, this.scope));
         this.blockParsers.push(new LoopWhileExpressionIsTrueParser(this.linesOfCode, this.scope));
         this.blockParsers.push(new ForEveryLoopParser(this.linesOfCode, this.scope));
