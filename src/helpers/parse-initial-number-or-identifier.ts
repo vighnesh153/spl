@@ -1,5 +1,5 @@
 const isValid = (text: string, reversed: boolean): boolean => {
-    return /^\s*[_.a-zA-Z0-9*+\-/%()]*$/.test(text);
+    return /^\s*[_.a-zA-Z0-9*+\-/%()\[\]]*$/.test(text);
 }
 
 export const parseInitialNumberOrIdentifier = (text: string, reversed: boolean): string => {

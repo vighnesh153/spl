@@ -1,6 +1,5 @@
 import { reverseString } from "src/helpers/reverse-string";
 import { parseInitialNumberOrIdentifier } from "src/helpers/parse-initial-number-or-identifier";
-import { NumberEvaluator } from "src/expression-evaluators/arithmetic-expressions/number-evaluator";
 import { Scope } from "src/models/Scope";
 import { ArithmeticExpressionEvaluator } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
 

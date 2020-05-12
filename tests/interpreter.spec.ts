@@ -170,4 +170,19 @@ describe('check the functionality of variable and display parsers.', () => {
         const result = OutputBuffer.instance.getAndFlush();
         expect(result).toStrictEqual('1\n22\n333\n');
     });
+
+    test('should correctly push elements into array.', () => {
+        addLineOfCode(`let array of number, arr, be [1, 22, 333]`)
+        addLineOfCode(`push 4440 + 4 into arr`)
+        addLineOfCode(`push 5 * 11111 * arr[0] into arr`)
+        addLineOfCode('for every item in arr:')
+        addLineOfCode('    display item')
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const result = OutputBuffer.instance.getAndFlush();
+        expect(result).toStrictEqual('1\n22\n333\n4444\n55555\n');
+    });
 });
