@@ -94,4 +94,22 @@ describe('check the functionality of variable and display parsers.', () => {
         const output = OutputBuffer.instance.getAndFlush();
         expect(output).toStrictEqual('3\n6\n9\n12\n');
     });
+
+    test('should perform recursion to find the factorial of a number.', () => {
+        addLineOfCode('define function factorial with ' +
+            'arguments [number n] which returns number:');
+        addLineOfCode('    if n == 1, then do:');
+        addLineOfCode('        return 1');
+        addLineOfCode('    let number nMinus1Factorial be result of factorial(n - 1)');
+        addLineOfCode('    return n * nMinus1Factorial');
+        addLineOfCode('let number fiveFactorial be result of factorial(5)');
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        expect(scope.hasVariable('fiveFactorial')).toStrictEqual(true);
+        const variable = scope.getVariable('fiveFactorial');
+        expect(variable.value).toStrictEqual(120);
+    });
 });

@@ -34,6 +34,7 @@ export class FunctionExpressionEvaluator extends ExpressionEvaluator {
 
         const func = this.scope.getFunction(funcName);
         func.argv = csvSplit(funcArgs);
+        func.evaluationScope = this.scope;
 
         func.execute();
 

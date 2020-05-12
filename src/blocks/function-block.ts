@@ -19,6 +19,7 @@ export class FunctionBlock extends Block {
 
     private result: Variable | undefined;
     argv: string[] = [];
+    evaluationScope: Scope = new Scope();
 
     public static define(funcBlock: FunctionBlock, scope: Scope): void {
         if (scope.hasFunction(funcBlock.functionName)) {
@@ -67,7 +68,7 @@ export class FunctionBlock extends Block {
         return result;
     }
 
-    private static tryDefine(typeAndName: string, value: string, scope: Scope): void {
+    private static tryDefine(typeAndName: string, value: string, scope: Scope, evalScope: Scope): void {
         const components =  typeAndName.split(' ');
         let loc = '';
         if (components.length !== 2 && components.length !== 4) {
@@ -80,7 +81,7 @@ export class FunctionBlock extends Block {
             loc = `let array of ${components[2]}, ${components[3]}, be ${value}`;
         }
         const lineOfCode = new LineOfCode(loc, Math.random());
-        const parser = new VariableDeclarationParser(scope, [lineOfCode]);
+        const parser = new VariableDeclarationParser(scope, [lineOfCode], evalScope);
         if (parser.tryParse() === false) {
             throw new Error("Can't be parsed.");
         }
@@ -97,7 +98,7 @@ export class FunctionBlock extends Block {
 
         for (let i = 0; i < this.functionArguments.length; i++) {
             try {
-                FunctionBlock.tryDefine(this.functionArguments[i], this.argv[i], newScope);
+                FunctionBlock.tryDefine(this.functionArguments[i], this.argv[i], newScope, this.evaluationScope);
             } catch (e) {
                 throw new Error(`Invalid argument declaration or assignment: ` +
                     `${this.functionArguments[i]} <= ${this.argv[i]}.`);

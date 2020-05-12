@@ -21,13 +21,16 @@ export class VariableDeclarationParser extends BlockParser {
         /^let\s* array\s* of\s* (\S*)\s*,\s*(\S*)\s*,\s*be\s* (.*)$/;
 
     constructor(public scope: Scope,
-                public lineOfCodes: LineOfCode[]) {
+                public lineOfCodes: LineOfCode[],
+                public evaluationScope?: Scope) {
         super();
 
-        this.expressionEvaluators.number = new ArithmeticExpressionEvaluator(this.scope);
-        this.expressionEvaluators.boolean = new BooleanExpressionEvaluator(this.scope);
-        this.expressionEvaluators.string = new StringExpressionEvaluator(this.scope);
-        this.expressionEvaluators.array = new ArrayExpressionEvaluator(this.scope);
+        const scopeForEvaluation = evaluationScope ? (evaluationScope as Scope) : scope;
+
+        this.expressionEvaluators.number = new ArithmeticExpressionEvaluator(scopeForEvaluation);
+        this.expressionEvaluators.boolean = new BooleanExpressionEvaluator(scopeForEvaluation);
+        this.expressionEvaluators.string = new StringExpressionEvaluator(scopeForEvaluation);
+        this.expressionEvaluators.array = new ArrayExpressionEvaluator(scopeForEvaluation);
     }
 
     private tryParsePrimitive(): boolean {
