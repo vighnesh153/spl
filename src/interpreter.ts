@@ -9,6 +9,8 @@ import { LoopForXTimesParser } from "src/parsers/block-parsers/loop-parsers/loop
 import { LoopWhileExpressionIsTrueParser } from "src/parsers/block-parsers/loop-parsers/loop-while-expression-is-true-parser";
 import { ForEveryLoopParser } from "src/parsers/block-parsers/loop-parsers/for-every-loop-parser";
 import { ReturnParser } from "src/parsers/block-parsers/functions/return-parser";
+import { FunctionExecutionParser } from "src/parsers/block-parsers/functions/function-execution-parser";
+import { FunctionDefinitionBlockParser } from "src/parsers/block-parsers/functions/function-definition-block-parser";
 
 /*
  *
@@ -36,6 +38,8 @@ export class Interpreter {
 
         this.createCopyOfLinesOfCode();
 
+        this.blockParsers.push(new FunctionExecutionParser(this.scope, this.linesOfCode));
+        this.blockParsers.push(new FunctionDefinitionBlockParser(this.scope, this.linesOfCode));
         this.blockParsers.push(new ReturnParser(this.scope, this.linesOfCode));
 
         this.blockParsers.push(new VariableDeclarationParser(this.scope, this.linesOfCode));
