@@ -20,6 +20,7 @@ export class LineOfCode {
     }
 
     isIndentationValid() {
-        // TODO: check if count of spaces is multiples of 4
+        const count = this.value.search(/\S|$/);
+        return count % 4 === 0
     }
 }
