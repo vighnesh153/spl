@@ -1,0 +1,25 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.info .menu-btn {
+    width: 80%;
+    height: 25%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0A192F;
+    color: #64FFDA;
+
+    text-decoration: none;
+    transition: 100ms ;
+}
+
+.menu-btn:hover {
+    transform: scale(1.01);
+}

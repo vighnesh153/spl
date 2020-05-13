@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: 'Rokkitt', serif;
+}
+
+body {
+    display: block;
+    position: relative;
+
+    height: 100vh;
+    min-height: 500px;
+
+    width: 100%;
+    min-width: 1000px;
+
+}
+
+nav {
+    height: 10%;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: black;
+
+    font-size: 40px;
+    color: #64FFDA;
+}
+
+main {
+    height: 90%;
+    display: flex;
+    position: relative;
+}
+
+section.left,
+section.right {
+    height: 100%;
+}
+
+section.left {
+    width: 70%;
+    position: relative;
+}
+
+section.left .code-area {
+
+}
+
+section.right {
+    width: 30%;
+    position: relative;
+}
+
+section.right .info {
+    height: 30%;
+    position: relative;
+}
+
+section.right .console-container {
+    height: 70%;
+    position: relative;
+}
+
+.console-container .console-title {
+    height: 10%;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0A0E10;
+    color: #64FFDA;
+}
+
+.console-container .console-div {
+    height: 90%;
+    position: relative;
+}

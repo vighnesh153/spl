@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SPL: Simple Programming Language</title>
+
+    <!--    Google Fonts    -->
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@200;400;600;700;900&display=swap" rel="stylesheet">
+
+    <!--   CodeMirror Vendor    -->
+    <link rel="stylesheet" href="./lib/codemirror.css">
+    <link rel="stylesheet" href="lib/code-editor-theme.css">
+    <link rel="stylesheet" href="lib/console-theme.css">
+    <script src="./lib/codemirror.js"></script>
+    <script src="./lib/simple-mode-addon.js"></script>
+
+    <link rel="stylesheet" href="./css/codemirror-overrides.css">
+    <link rel="stylesheet" href="./css/menu-styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
+
+<nav>SPL</nav>
+<main>
+    <section class="left">
+        <label for="code-area"></label>
+        <textarea name="code-area" id="code-area" class="code-area"></textarea>
+    </section>
+    <section class="right">
+        <div class="info">
+            <a target="_blank" href="https://github.com/vighnesh153/spl" class="menu-btn"
+               rel="noreferrer noopener nofollow">View Source Code</a>
+            <a target="_blank" href="https://github.com/vighnesh153/spl/blob/master/README.md" class="menu-btn"
+               rel="noreferrer noopener nofollow">Learn Syntax</a>
+            <a target="_blank" href="https://github.com/vighnesh153/spl/blob/master/EXAMPLES.md" class="menu-btn"
+               rel="noreferrer noopener nofollow">Examples</a>
+        </div>
+        <div class="console-container">
+            <h3 class="console-title">Console</h3>
+            <div class="console-div">
+                <label for="console"></label>
+                <textarea name="console" id="console" class="console"></textarea>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="./js/config.js"></script>
+<script src="./js/setup.js"></script>
+<script>
+
+</script>
 
 </body>
 </html>
