@@ -97,6 +97,22 @@ describe('check the functionality of variable and display parsers.', () => {
         expect(output).toStrictEqual('3\n6\n9\n12\n');
     });
 
+    test('should use the add function to add numbers.', () => {
+        addLineOfCode("define function add with arguments " +
+            "[ number a, number b ] which returns number:");
+        addLineOfCode("    return a + b");
+        addLineOfCode("let number c be result of add(3, 13)");
+        addLineOfCode("let number a be result of add((c), 14)");
+        addLineOfCode("display a");
+        linesOfCode.reverse();
+
+        interpreter = new Interpreter(linesOfCode, scope);
+        interpreter.interpret();
+
+        const output = OutputBuffer.instance.getAndFlush();
+        expect(output).toStrictEqual('30\n');
+    });
+
     test('should perform recursion to find the factorial of a number.', () => {
         addLineOfCode('define function factorial with ' +
             'arguments [number n] which returns number:');
