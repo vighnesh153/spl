@@ -7,7 +7,8 @@
 .cm-s-material-ocean.CodeMirror {
     /*background-color: #0F111A;*/
     background-color: #0A192F;
-    color: #8F93A2;
+    /*color: #8F93A2;*/
+    color: white;
 }
 
 .cm-s-material-ocean .CodeMirror-gutters {
@@ -72,8 +73,8 @@
 }
 
 .cm-s-material-ocean .cm-atom {
-    /*color: #F78C6C;*/
-    color: #64FFDA;
+    color: #F78C6C;
+    /*color: #64FFDA;*/
 }
 
 .cm-s-material-ocean .cm-number {
@@ -97,7 +98,8 @@
 }
 
 .cm-s-material-ocean .cm-variable {
-    color: #f07178;
+    /*color: #f07178;*/
+    color: #64FFDA;
 }
 
 .cm-s-material-ocean .cm-tag {

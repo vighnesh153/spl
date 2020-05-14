@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="./css/codemirror-overrides.css">
     <link rel="stylesheet" href="./css/menu-styles.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
@@ -33,8 +34,7 @@
                rel="noreferrer noopener nofollow">View Source Code</a>
             <a target="_blank" href="https://github.com/vighnesh153/spl/blob/master/README.md" class="menu-btn"
                rel="noreferrer noopener nofollow">Learn Syntax</a>
-            <a target="_blank" href="https://github.com/vighnesh153/spl/blob/master/EXAMPLES.md" class="menu-btn"
-               rel="noreferrer noopener nofollow">Examples</a>
+            <button class="menu-btn examples">Examples</button>
         </div>
         <div class="console-container">
             <h3 class="console-title">Console</h3>
@@ -46,6 +46,22 @@
     </section>
 </main>
 
+<div class="modal-bg">
+    <div class="modal">
+        <p class="examples-title">Examples</p>
+        <div class="examples-container">
+            <p class="examples-note">
+                Note: Selecting any of the examples will overwrite the code in the editor.
+            </p>
+<!--            <div class="example">Example</div>-->
+<!--            <div class="example">Example</div>-->
+<!--            <div class="example">Example</div>-->
+        </div>
+    </div>
+</div>
+
+<script src="./js/modal.js"></script>
+<script src="./js/examples.js"></script>
 <script src="./js/config.js"></script>
 <script src="./js/setup.js"></script>
 <script>
