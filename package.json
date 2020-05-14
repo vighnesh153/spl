@@ -4,7 +4,7 @@
   "description": "A simple programming language.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "webpack --config webpack.config.js",
     "test": "jest --no-cache"
   },
   "repository": {
@@ -21,11 +21,22 @@
   },
   "homepage": "https://github.com/vighnesh153/spl#readme",
   "devDependencies": {
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
+    "@types/jest": "^25.2.2",
+    "@types/node": "^13.13.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
-    "nodemon": "^2.0.3",
-    "ts-jest": "^25.4.0",
-    "typescript": "^3.8.3"
+    "mini-css-extract-plugin": "^0.9.0",
+    "nodemon": "^2.0.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^3.0.1",
+    "ts-jest": "^25.5.1",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
