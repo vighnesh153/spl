@@ -1,4 +1,4 @@
-const keywords = [
+export const keywords = [
     'define',
     'if',
     'else',

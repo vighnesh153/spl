@@ -1,3 +1,6 @@
+import { editor } from "./setup";
+import { modalBg, body, modalButton, modal } from "./modal";
+
 const examples = [
     { name: 'example 1', code:
 `let number a be 123

@@ -1,4 +1,7 @@
-const consoleTab = CodeMirror.fromTextArea(
+import { keywords } from "./config";
+
+
+export const consoleTab = CodeMirror.fromTextArea(
     document.getElementById('console'),
     {
         theme: 'material-palenight',
@@ -23,7 +26,7 @@ CodeMirror.defineSimpleMode("simplemode", {
 });
 
 
-const editor = CodeMirror.fromTextArea(
+export const editor = CodeMirror.fromTextArea(
     document.getElementById('code-area'),
     {
         lineNumbers: true,
