@@ -34,4 +34,6 @@ const keywords = [
     'every',
     'in',
     'index',
+    'return',
+    'execute',
 ];
