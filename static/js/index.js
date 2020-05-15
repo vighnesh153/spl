@@ -26,10 +26,18 @@ runButton.addEventListener('click', () => {
 
     const main = new Main(code);
     main.compile();
-    consoleTab.setValue('Compiling......');
+    const processingTime = (new Date()).toLocaleString();
+    consoleTab.setValue(`Processing, started at: ${processingTime}\n`);
 
-    const output = main.getOutput();
-    consoleTab.setValue(output);
+    setTimeout(() => {
+        const output = main.getOutput();
+        const outputTime = (new Date()).toLocaleString();
+        consoleTab.setValue(
+            `Output at: ${outputTime}\n` +
+            `********************\n` +
+            `${output}`
+        );
 
-    isProgramRunning = false;
+        isProgramRunning = false;
+    }, 0);
 });
