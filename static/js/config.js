@@ -38,4 +38,5 @@ export const keywords = [
     'execute',
     'or',
     'and',
+    'result',
 ];
