@@ -36,4 +36,6 @@ export const keywords = [
     'index',
     'return',
     'execute',
+    'or',
+    'and',
 ];
