@@ -6,7 +6,7 @@ export const consoleTab = CodeMirror.fromTextArea(
     {
         theme: 'material-palenight',
         indentUnit: 4,
-        readOnly: "nocursor"
+        readOnly: true
     }
 );
 consoleTab.setSize("100%", "100%");
