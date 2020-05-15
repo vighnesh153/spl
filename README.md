@@ -4,7 +4,7 @@
 **SPL** is a small friendly neighbourhood programming language 
 which is developed with the intention of helping 
 people start with their programming journey.
-
+[Live Demo](https://vighnesh153.github.io/spl/index.html)
 
 #### Why SPL?
 It is not any advanced language which you can 
