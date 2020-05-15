@@ -3,7 +3,7 @@ import { Scope } from "src/models/Scope";
 import { csvSplit } from "src/helpers/csv-split";
 
 export class FunctionExpressionEvaluator extends ExpressionEvaluator {
-    private static assignmentRegex = /^result\s* of ([_a-zA-Z][_a-zA-Z0-9]*)\((.*)\)\s*$/;
+    private static assignmentRegex = /^result\s* of\s* ([_a-zA-Z][_a-zA-Z0-9]*)\((.*)\)\s*$/;
 
     constructor(public scope: Scope) {
         super();
