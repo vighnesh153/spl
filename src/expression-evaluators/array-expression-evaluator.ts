@@ -13,6 +13,8 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
     private static arrayParser = ArrayParser.instance
     private readonly expressionEvaluators: ExpressionEvaluator[] = [];
 
+    private readonly functionExpressionEvaluator: FunctionExpressionEvaluator;
+
     private types: { [key: number]: string } = {
         0: 'number',
         1: 'boolean',
@@ -28,7 +30,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
         this.expressionEvaluators.push(new BooleanExpressionEvaluator(this.scope));
         this.expressionEvaluators.push(new StringExpressionEvaluator(this.scope));
 
-        this.expressionEvaluators.push(new FunctionExpressionEvaluator(this.scope));
+        this.functionExpressionEvaluator = new FunctionExpressionEvaluator(this.scope);
     }
 
     getType(text: string): string {
@@ -50,6 +52,10 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
 
     private tryParseExpressionBasedArray(text: string): boolean {
         const trimmed = text.trim();
+
+        if (this.functionExpressionEvaluator.tryEvaluate(text)) {
+            return true;
+        }
 
         if (trimmed.startsWith('[') === false ||
             trimmed.endsWith(']') === false) {
@@ -87,7 +93,11 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
     }
 
     private parseExpressionBasedArray(text: string): any {
-        const trimmed = text.trim();
+        let trimmed = text.trim();
+
+        if (this.functionExpressionEvaluator.tryEvaluate(trimmed)) {
+            trimmed = this.functionExpressionEvaluator.evaluate(trimmed);
+        }
 
         // Remove the start and end brackets
         const innerContent = trimmed.slice(1, trimmed.length - 1).trim();

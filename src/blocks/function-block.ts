@@ -58,10 +58,10 @@ export class FunctionBlock extends Block {
 
     getResult(): Variable {
         if (this.shouldReturnSomething === false) {
-            throw 'Function returns nothing according to definition.';
+            throw new Error('Function returns nothing according to definition.');
         }
         if (this.result === undefined) {
-            throw 'Function didn\'t return anything.';
+            throw new Error('Function didn\'t return anything.');
         }
         const result = this.result as Variable;
         this.result = undefined;

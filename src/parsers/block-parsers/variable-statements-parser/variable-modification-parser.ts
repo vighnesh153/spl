@@ -83,6 +83,7 @@ export class VariableModificationParser extends BlockParser {
                 if (evaluator.tryEvaluate(value)) {
                     value = evaluator.evaluate(value)
                     type =  this.mapping[i];
+                    break;
                 }
             }
 

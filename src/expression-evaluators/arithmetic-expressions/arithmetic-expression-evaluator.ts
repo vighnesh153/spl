@@ -60,9 +60,13 @@ export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
                 let parsedByAny = false;
                 for (const evaluator of this.expressionEvaluators) {
                     if (evaluator.tryEvaluate(text)) {
-                        parsedByAny = true;
-                        text = "" +  evaluator.evaluate(text);
-                        break;
+                        try {
+                            text = "" +  evaluator.evaluate(text);
+                            parsedByAny = true;
+                            break;
+                        } catch (e) {
+
+                        }
                     }
                 }
                 if (!parsedByAny) {
