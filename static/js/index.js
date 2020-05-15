@@ -24,12 +24,12 @@ runButton.addEventListener('click', () => {
     isProgramRunning = true;
     const code = editor.getValue();
 
-    const main = new Main(code);
-    main.compile();
     const processingTime = (new Date()).toLocaleString();
     consoleTab.setValue(`Processing, started at: ${processingTime}\n`);
 
     setTimeout(() => {
+        const main = new Main(code);
+        main.compile();
         const output = main.getOutput();
         const outputTime = (new Date()).toLocaleString();
         consoleTab.setValue(
