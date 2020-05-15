@@ -25,7 +25,9 @@ export class Main {
     compile(scope?: Scope): void {
         try {
             this.preProcess();
-            new Interpreter(this.linesOfCode.reverse(), scope ? scope as Scope : globalScope).interpret();
+            new Interpreter(this.linesOfCode.reverse(),
+                scope ? scope as Scope : globalScope.shallowClone()
+            ).interpret();
         } catch (e) {
             OutputBuffer.instance.push(e.message);
         }
