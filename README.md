@@ -102,9 +102,13 @@ Notice the punctuation, comma, after the boolean expression.
 
 > If you want to use arithmetic expressions in 
 > the boolean expression, then use them without 
-> having any whitespace between them, or unexpected things 
-> may occur. eg. `1 + 2 * (3 + 1) < 4` won't work 
-> but `1+2*(3+1) < 4` will.
+> having any whitespace between them and no 
+> parentheses in arithmetic expressions inside 
+> a boolean expression, or unexpected things 
+> may occur. eg. `1 + 2 * 3 * 1 < 4` won't work 
+> but `1+2*3*1 < 4` will. It is recommended to 
+> store the result of the arithmetic expression in
+> a variable and then use that variable to compare. 
 
 ###### Now, the fun begins.
 
@@ -151,6 +155,8 @@ command to just execute the function.
 
 ### Language Notes and Caveats
 
+* Output will be printed all at once instead of 
+  printing when display is called.
 * Indentation is extremely important (just like Python)
 * 4-spaces or 1 tab character for indentation
 * Comments are not supported in this iteration
