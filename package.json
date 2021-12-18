@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/jest": "^25.2.2",
     "@types/node": "^13.13.6",
-    "clean-webpack-plugin": "^3.0.0",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^3.5.3",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
